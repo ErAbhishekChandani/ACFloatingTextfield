@@ -16,8 +16,10 @@
 @property (nonatomic,strong) UIColor *btmLineColor;
 @property (nonatomic,strong) UIColor *placeHolderTextColor;
 @property (nonatomic,strong) UIColor *selectedPlaceHolderTextColor;
-@property (nonatomic,strong) UILabel *labelPlaceholder;
 @property (nonatomic,strong) UIColor *btmLineSelectionColor;
+
+@property (nonatomic,strong) UILabel *labelPlaceholder;
+
 @property (assign) BOOL disableFloatingLabel;
 
 -(instancetype)init;
@@ -27,4 +29,5 @@
 -(void)textFieldDidEndEditing;
 -(void)setTextFieldPlaceholderText:(NSString *)placeholderText;
 -(void)upadteTextField:(CGRect)frame;
+
 @end
