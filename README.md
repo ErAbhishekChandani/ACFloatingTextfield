@@ -1,6 +1,3 @@
-
-![ACFloatingTextField: Float the Label!]
-
 # ACFloatingTextField
 
 UITextfield class to float the Placeholder and customize the placeholder while editing.
@@ -32,7 +29,7 @@ Download the Sample and drag & drop the ACFloatingTextField.h and ACFloatingText
 
 [(ACFloatingTextField *)textField setTextFieldPlaceholderText:@"Username"];
 
-``
+```
 
 **4)Implement the UITextfield Delegate methods DidBeganEditing and DidEndEditing.**
 
@@ -49,7 +46,7 @@ Download the Sample and drag & drop the ACFloatingTextField.h and ACFloatingText
 
 }
 
-``
+```
 
 ##Customization
 
@@ -59,8 +56,7 @@ Download the Sample and drag & drop the ACFloatingTextField.h and ACFloatingText
 
 _textField.btmLineColor = [UIColor blueColor];
 
-``
-
+```
 
 **2) Change the selected State colour for Bottom Line.**
 
@@ -68,7 +64,7 @@ _textField.btmLineColor = [UIColor blueColor];
 
 _textField.btmLineSelectionColor = [UIColor orangeColor];
 
-``
+```
 
 **3) Change the Placeholder Color.**
 
@@ -76,7 +72,7 @@ _textField.btmLineSelectionColor = [UIColor orangeColor];
 
 _textField.placeHolderTextColor = [UIColor redColor];
 
-``
+```
 
 **4) Change the Selected Placeholder Color.**
 
@@ -84,7 +80,7 @@ _textField.placeHolderTextColor = [UIColor redColor];
 
 _textField.selectedPlaceHolderTextColor = [UIColor greenColor];
 
-``
+```
 
 ## Communication
 
