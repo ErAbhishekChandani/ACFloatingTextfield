@@ -59,7 +59,7 @@
     [super setText:text];
     if (text) {
         
-        [self floatPlaceHolder];
+        [self floatTheLabel];
         
     }
     [self checkForDefaulLabel];
@@ -117,7 +117,7 @@
     
     if (![self.text isEqualToString:@""]) {
         
-        [self floatPlaceHolder];
+        [self floatTheLabel];
     }
     
 }
@@ -162,9 +162,9 @@
 }
 
 #pragma mark  Float UITextfield Placeholder Label.
--(void)floatPlaceHolder {
+-(void)floatPlaceHolder:(BOOL)selected {
     
-    if ([self.text isEqualToString:@""]||self.isFirstResponder) {
+    if (selected) {
         
         bottomLineView.backgroundColor = _btmLineSelectionColor;
         
@@ -227,66 +227,77 @@
     }
     
 }
+-(void)resignPlaceholder{
 
+    bottomLineView.backgroundColor = _btmLineColor;
+    
+    if (self.disableFloatingLabel){
+        
+        _labelPlaceholder.hidden = NO;
+        _labelPlaceholder.textColor = _placeHolderTextColor;
+        CGRect bottmLineFrame = bottomLineView.frame;
+        bottmLineFrame.origin.y = CGRectGetHeight(self.frame)-1;
+        [UIView animateWithDuration:0.2 animations:^{
+            bottomLineView.frame  =  bottmLineFrame;
+        }];
+        
+        return;
+        
+    }
+    
+    
+    CGRect frame = CGRectMake(5, 0, self.frame.size.width-5, self.frame.size.height);
+    CGRect bottmLineFrame = bottomLineView.frame;
+    bottmLineFrame.origin.y = CGRectGetHeight(self.frame)-1;
+    [UIView animateWithDuration:0.2 animations:^{
+        _labelPlaceholder.frame = frame;
+        _labelPlaceholder.font = self.font;
+        _labelPlaceholder.textColor = _placeHolderTextColor;
+        bottomLineView.frame  =  bottmLineFrame;
+    }];
+
+}
 #pragma mark  UITextField Begin Editing.
 
 -(void)textFieldDidBeginEditing {
     
-    [self floatPlaceHolder];
+    [self floatTheLabel];
     [self layoutSubviews];
     
 }
 
-
 #pragma mark  UITextField End Editing.
 -(void)textFieldDidEndEditing {
     
-    if ([self.text isEqualToString:@""]){
-        
-        bottomLineView.backgroundColor = _btmLineColor;
-        
-        if (self.disableFloatingLabel){
-            
-            _labelPlaceholder.hidden = NO;
-            _labelPlaceholder.textColor = _placeHolderTextColor;
-            CGRect bottmLineFrame = bottomLineView.frame;
-            bottmLineFrame.origin.y = CGRectGetHeight(self.frame)-1;
-            [UIView animateWithDuration:0.2 animations:^{
-                bottomLineView.frame  =  bottmLineFrame;
-            }];
-            
-            return;
-            
-        }
-        
-        
-        CGRect frame = CGRectMake(5, 0, self.frame.size.width-5, self.frame.size.height);
-        CGRect bottmLineFrame = bottomLineView.frame;
-        bottmLineFrame.origin.y = CGRectGetHeight(self.frame)-1;
-        [UIView animateWithDuration:0.2 animations:^{
-            _labelPlaceholder.frame = frame;
-            _labelPlaceholder.font = self.font;
-            _labelPlaceholder.textColor = _placeHolderTextColor;
-            bottomLineView.frame  =  bottmLineFrame;
-        }];
-        
-    }else{
-        
-        if (_btmLineColor==nil) {
-            _btmLineColor = [UIColor blackColor];
-        }
-        bottomLineView.backgroundColor = _btmLineColor;
-        _labelPlaceholder.textColor = _placeHolderTextColor;
-        
-        CGRect bottmLineFrame = bottomLineView.frame;
-        bottmLineFrame.origin.y = CGRectGetHeight(self.frame)-1;
-        [UIView animateWithDuration:0.2 animations:^{
-            bottomLineView.frame  =  bottmLineFrame;
-        }];
-        
-    }
+    [self floatTheLabel];
     
 }
+
+#pragma mark  Float & Resign
+
+-(void)floatTheLabel{
+    
+    if ([self.text isEqualToString:@""]&&self.isFirstResponder) {
+        
+        [self floatPlaceHolder:YES];
+        
+    }else if ([self.text isEqualToString:@""]&&!self.isFirstResponder) {
+    
+        [self resignPlaceholder];
+        
+    }else if (![self.text isEqualToString:@""]&&!self.isFirstResponder) {
+        
+        [self floatPlaceHolder:NO];
+        
+    }else if (![self.text isEqualToString:@""]&&self.isFirstResponder) {
+        
+        [self floatPlaceHolder:YES];
+    }
+
+    [self checkForDefaulLabel];
+
+}
+
 
 #pragma mark  Set Placeholder Text On Labels
 -(void)setTextFieldPlaceholderText:(NSString *)placeholderText {
