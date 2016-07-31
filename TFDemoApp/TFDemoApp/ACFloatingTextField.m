@@ -62,21 +62,13 @@
         [self floatPlaceHolder];
         
     }
+    [self checkForDefaulLabel];
 }
 -(void)initialization{
     
     //HIDE DEFAULT PLACEHOLDER LABEL OF UITEXTFIELD
     
-    for (UIView *view in self.subviews) {
-        
-        if ([view isKindOfClass:[UILabel class]]) {
-            
-            UILabel *newLabel = (UILabel *)view;
-            if (newLabel.tag!=21) {
-                newLabel.hidden = YES;
-            }
-        }
-    }
+    [self checkForDefaulLabel];
     
     //VARIABLE INITIALIZATIONS
     
@@ -126,6 +118,37 @@
     if (![self.text isEqualToString:@""]) {
         
         [self floatPlaceHolder];
+    }
+    
+}
+-(void)checkForDefaulLabel{
+    
+    if ([self.text isEqualToString:@""]) {
+        
+        for (UIView *view in self.subviews) {
+            
+            if ([view isKindOfClass:[UILabel class]]) {
+                
+                UILabel *newLabel = (UILabel *)view;
+                if (newLabel.tag!=21) {
+                    newLabel.hidden = YES;
+                }
+            }
+        }
+        
+    }else{
+        
+        for (UIView *view in self.subviews) {
+            
+            if ([view isKindOfClass:[UILabel class]]) {
+                
+                UILabel *newLabel = (UILabel *)view;
+                if (newLabel.tag!=21) {
+                    newLabel.hidden = NO;
+                }
+            }
+        }
+        
     }
     
 }
