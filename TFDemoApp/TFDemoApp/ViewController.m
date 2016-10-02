@@ -24,10 +24,10 @@
     [super viewDidLoad];
     
     [_textField setTextFieldPlaceholderText:@"Username"];
-    _textField.btmLineSelectionColor = [UIColor orangeColor];
-    _textField.placeHolderTextColor = [UIColor redColor];
-    _textField.selectedPlaceHolderTextColor = [UIColor greenColor];
-    _textField.btmLineColor = [UIColor blueColor];
+    _textField.selectedLineColor = [UIColor orangeColor];
+    _textField.placeHolderColor = [UIColor redColor];
+    _textField.selectedPlaceHolderColor = [UIColor greenColor];
+    _textField.lineColor = [UIColor blueColor];
     
     
     tf_ = [[ACFloatingTextField alloc]initWithFrame:CGRectMake(20, 300, CGRectGetWidth([UIScreen mainScreen].bounds)-40, 45)];
@@ -42,11 +42,11 @@
 #pragma mark  UITextfield Delegates
 -(void)textFieldDidBeginEditing:(UITextField *)textField {
 
-    [(ACFloatingTextField *)textField textFieldDidBeginEditing];
 }
 -(void)textFieldDidEndEditing:(UITextField *)textField {
-    [(ACFloatingTextField *)textField textFieldDidEndEditing];
+    
 }
+
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
 
     [textField resignFirstResponder];

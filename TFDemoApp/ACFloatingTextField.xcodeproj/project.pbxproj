@@ -17,7 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4646CEC41D25500800D4F1E0 /* TFDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TFDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4646CEC41D25500800D4F1E0 /* ACFloatingTextField.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ACFloatingTextField.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4646CEC81D25500800D4F1E0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4646CECA1D25500800D4F1E0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4646CECB1D25500800D4F1E0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -45,7 +45,7 @@
 		4646CEBB1D25500800D4F1E0 = {
 			isa = PBXGroup;
 			children = (
-				4646CEC61D25500800D4F1E0 /* TFDemoApp */,
+				4646CEC61D25500800D4F1E0 /* ACFloatingTextField */,
 				4646CEC51D25500800D4F1E0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -53,12 +53,12 @@
 		4646CEC51D25500800D4F1E0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4646CEC41D25500800D4F1E0 /* TFDemoApp.app */,
+				4646CEC41D25500800D4F1E0 /* ACFloatingTextField.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4646CEC61D25500800D4F1E0 /* TFDemoApp */ = {
+		4646CEC61D25500800D4F1E0 /* ACFloatingTextField */ = {
 			isa = PBXGroup;
 			children = (
 				4646CEE11D25502200D4F1E0 /* TF */,
@@ -72,6 +72,7 @@
 				4646CED81D25500800D4F1E0 /* Info.plist */,
 				4646CEC71D25500800D4F1E0 /* Supporting Files */,
 			);
+			name = ACFloatingTextField;
 			path = TFDemoApp;
 			sourceTree = "<group>";
 		};
@@ -95,9 +96,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4646CEC31D25500800D4F1E0 /* TFDemoApp */ = {
+		4646CEC31D25500800D4F1E0 /* ACFloatingTextField */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4646CEDB1D25500800D4F1E0 /* Build configuration list for PBXNativeTarget "TFDemoApp" */;
+			buildConfigurationList = 4646CEDB1D25500800D4F1E0 /* Build configuration list for PBXNativeTarget "ACFloatingTextField" */;
 			buildPhases = (
 				4646CEC01D25500800D4F1E0 /* Sources */,
 				4646CEC11D25500800D4F1E0 /* Frameworks */,
@@ -107,9 +108,9 @@
 			);
 			dependencies = (
 			);
-			name = TFDemoApp;
+			name = ACFloatingTextField;
 			productName = TFDemoApp;
-			productReference = 4646CEC41D25500800D4F1E0 /* TFDemoApp.app */;
+			productReference = 4646CEC41D25500800D4F1E0 /* ACFloatingTextField.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -126,7 +127,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4646CEBF1D25500800D4F1E0 /* Build configuration list for PBXProject "TFDemoApp" */;
+			buildConfigurationList = 4646CEBF1D25500800D4F1E0 /* Build configuration list for PBXProject "ACFloatingTextField" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -139,7 +140,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4646CEC31D25500800D4F1E0 /* TFDemoApp */,
+				4646CEC31D25500800D4F1E0 /* ACFloatingTextField */,
 			);
 		};
 /* End PBXProject section */
@@ -282,7 +283,7 @@
 				INFOPLIST_FILE = TFDemoApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.abhishek.TFDemoApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ACFloatingTextField;
 			};
 			name = Debug;
 		};
@@ -293,14 +294,14 @@
 				INFOPLIST_FILE = TFDemoApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.abhishek.TFDemoApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ACFloatingTextField;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4646CEBF1D25500800D4F1E0 /* Build configuration list for PBXProject "TFDemoApp" */ = {
+		4646CEBF1D25500800D4F1E0 /* Build configuration list for PBXProject "ACFloatingTextField" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4646CED91D25500800D4F1E0 /* Debug */,
@@ -309,7 +310,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4646CEDB1D25500800D4F1E0 /* Build configuration list for PBXNativeTarget "TFDemoApp" */ = {
+		4646CEDB1D25500800D4F1E0 /* Build configuration list for PBXNativeTarget "ACFloatingTextField" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4646CEDC1D25500800D4F1E0 /* Debug */,

@@ -13,10 +13,10 @@
     UIView *bottomLineView;
 }
 
-@property (nonatomic,strong) UIColor *btmLineColor;
-@property (nonatomic,strong) UIColor *placeHolderTextColor;
-@property (nonatomic,strong) UIColor *selectedPlaceHolderTextColor;
-@property (nonatomic,strong) UIColor *btmLineSelectionColor;
+@property (nonatomic,strong) UIColor *lineColor;
+@property (nonatomic,strong) UIColor *placeHolderColor;
+@property (nonatomic,strong) UIColor *selectedPlaceHolderColor;
+@property (nonatomic,strong) UIColor *selectedLineColor;
 
 @property (nonatomic,strong) UILabel *labelPlaceholder;
 
@@ -25,8 +25,6 @@
 -(instancetype)init;
 -(instancetype)initWithFrame:(CGRect)frame;
 
--(void)textFieldDidBeginEditing;
--(void)textFieldDidEndEditing;
 -(void)setTextFieldPlaceholderText:(NSString *)placeholderText;
 -(void)upadteTextField:(CGRect)frame;
 

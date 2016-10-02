@@ -11,20 +11,21 @@
 @implementation ACFloatingTextField
 
 
-#pragma mark  Initialization Methods
-
+#pragma mark :- Drawing Methods
 -(void)drawRect:(CGRect)rect {
     
     [self upadteTextField:CGRectMake(CGRectGetMinX(self.frame), CGRectGetMinY(self.frame), CGRectGetWidth(rect), CGRectGetHeight(rect))];
     
 }
 
+#pragma mark :- Loading From NIB
 -(void)awakeFromNib {
     
     [self initialization];
     
 }
 
+#pragma mark :- Initialization Methods
 -(instancetype)init {
     
     if (self) {
@@ -46,6 +47,7 @@
     return self;
 }
 
+#pragma mark :- Drawing Text Rect
 - (CGRect)textRectForBounds:(CGRect)bounds {
     return CGRectMake(4, 4, bounds.size.width, bounds.size.height);
 }
@@ -54,6 +56,7 @@
     return CGRectMake(4, 4, bounds.size.width, bounds.size.height);
 }
 
+#pragma mark:- Override Set text
 -(void)setText:(NSString *)text {
     
     [super setText:text];
@@ -64,6 +67,7 @@
     }
     [self checkForDefaulLabel];
 }
+
 -(void)initialization{
     
     //HIDE DEFAULT PLACEHOLDER LABEL OF UITEXTFIELD
@@ -73,54 +77,70 @@
     //VARIABLE INITIALIZATIONS
     
     //1. Placeholder Color.
-    if (_placeHolderTextColor == nil){
-        _placeHolderTextColor = [UIColor lightGrayColor];
+    if (_placeHolderColor == nil){
+        _placeHolderColor = [UIColor lightGrayColor];
     }
     
     //2. Placeholder Color When Selected.
-    if (_selectedPlaceHolderTextColor==nil) {
-        _selectedPlaceHolderTextColor = [UIColor colorWithRed:19/256.0 green:141/256.0 blue:117/256.0 alpha:1.0];
+    if (_selectedPlaceHolderColor==nil) {
+        _selectedPlaceHolderColor = [UIColor colorWithRed:19/256.0 green:141/256.0 blue:117/256.0 alpha:1.0];
     }
     
     //3. Bottom line Color.
-    if (_btmLineColor==nil) {
-        _btmLineColor = [UIColor blackColor];
+    if (_lineColor==nil) {
+        _lineColor = [UIColor blackColor];
     }
     
     //4. Bottom line Color When Selected.
-    if (_btmLineSelectionColor==nil) {
-        _btmLineSelectionColor = [UIColor colorWithRed:19/256.0 green:141/256.0 blue:117/256.0 alpha:1.0];
+    if (_selectedLineColor==nil) {
+        _selectedLineColor = [UIColor colorWithRed:19/256.0 green:141/256.0 blue:117/256.0 alpha:1.0];
     }
     
-    [bottomLineView removeFromSuperview];
-    [_labelPlaceholder removeFromSuperview];
+    /// Adding Bottom Line View.
+    [self addBottomLineView];
     
-    if (![self.placeholder isEqualToString:@""]&&self.placeholder!=nil) {
-        _labelPlaceholder.text = self.placeholder;
-    }
+    /// Adding Placeholder Label.
+    [self addPlaceholderLabel];
     
-    NSString *placeHolderText = _labelPlaceholder.text;
-    
-    bottomLineView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetHeight(self.frame)-1, CGRectGetWidth(self.frame), 2)];
-    bottomLineView.backgroundColor = _btmLineColor;
-    bottomLineView.tag = 20;
-    [self addSubview:bottomLineView];
-    
-    //Placeholder Label Configuration.
-    _labelPlaceholder = [[UILabel alloc]initWithFrame:CGRectMake(5, 0, self.frame.size.width-5, CGRectGetHeight(self.frame))];
-    _labelPlaceholder.text = placeHolderText;
-    _labelPlaceholder.textAlignment = self.textAlignment;
-    _labelPlaceholder.textColor = _placeHolderTextColor;
-    _labelPlaceholder.font = self.font;;
-    _labelPlaceholder.tag = 21;
-    [self addSubview:_labelPlaceholder];
-    
+    /// Placeholder Label Configuration.
     if (![self.text isEqualToString:@""]) {
         
         [self floatTheLabel];
     }
     
 }
+
+#pragma mark :- Private Methods
+-(void)addBottomLineView{
+    
+    [bottomLineView removeFromSuperview];
+    bottomLineView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetHeight(self.frame)-1, CGRectGetWidth(self.frame), 2)];
+    bottomLineView.backgroundColor = _lineColor;
+    bottomLineView.tag = 20;
+    [self addSubview:bottomLineView];
+
+}
+-(void)addPlaceholderLabel{
+
+    
+    [_labelPlaceholder removeFromSuperview];
+
+    if (![self.placeholder isEqualToString:@""]&&self.placeholder!=nil) {
+        _labelPlaceholder.text = self.placeholder;
+    }
+    
+    NSString *placeHolderText = _labelPlaceholder.text;
+
+    _labelPlaceholder = [[UILabel alloc]initWithFrame:CGRectMake(5, 0, self.frame.size.width-5, CGRectGetHeight(self.frame))];
+    _labelPlaceholder.text = placeHolderText;
+    _labelPlaceholder.textAlignment = self.textAlignment;
+    _labelPlaceholder.textColor = _placeHolderColor;
+    _labelPlaceholder.font = self.font;;
+    _labelPlaceholder.tag = 21;
+    [self addSubview:_labelPlaceholder];
+
+}
+/// Hadling The Default Placeholder Label
 -(void)checkForDefaulLabel{
     
     if ([self.text isEqualToString:@""]) {
@@ -154,7 +174,6 @@
 }
 
 #pragma mark  Upadate and Manage Subviews
-
 -(void)upadteTextField:(CGRect )frame {
     
     self.frame = frame;
@@ -166,7 +185,7 @@
     
     if (selected) {
         
-        bottomLineView.backgroundColor = _btmLineSelectionColor;
+        bottomLineView.backgroundColor = _selectedLineColor;
         
         if (self.disableFloatingLabel){
             
@@ -188,7 +207,7 @@
         [UIView animateWithDuration:0.2 animations:^{
             _labelPlaceholder.frame = frame;
             _labelPlaceholder.font = [UIFont fontWithName:self.font.fontName size:12];
-            _labelPlaceholder.textColor = _selectedPlaceHolderTextColor;
+            _labelPlaceholder.textColor = _selectedPlaceHolderColor;
             bottomLineView.frame  =  bottmLineFrame;
             
         }];
@@ -196,7 +215,7 @@
     }
     else{
         
-        bottomLineView.backgroundColor = _btmLineColor;
+        bottomLineView.backgroundColor = _lineColor;
         
         if (self.disableFloatingLabel){
             
@@ -218,7 +237,7 @@
         [UIView animateWithDuration:0.2 animations:^{
             _labelPlaceholder.frame = frame;
             _labelPlaceholder.font = [UIFont fontWithName:self.font.fontName size:12];
-            _labelPlaceholder.textColor = _placeHolderTextColor;
+            _labelPlaceholder.textColor = _placeHolderColor;
             bottomLineView.frame  =  bottmLineFrame;
             
         }];
@@ -229,12 +248,12 @@
 }
 -(void)resignPlaceholder{
 
-    bottomLineView.backgroundColor = _btmLineColor;
+    bottomLineView.backgroundColor = _lineColor;
     
     if (self.disableFloatingLabel){
         
         _labelPlaceholder.hidden = NO;
-        _labelPlaceholder.textColor = _placeHolderTextColor;
+        _labelPlaceholder.textColor = _placeHolderColor;
         CGRect bottmLineFrame = bottomLineView.frame;
         bottmLineFrame.origin.y = CGRectGetHeight(self.frame)-1;
         [UIView animateWithDuration:0.2 animations:^{
@@ -252,7 +271,7 @@
     [UIView animateWithDuration:0.2 animations:^{
         _labelPlaceholder.frame = frame;
         _labelPlaceholder.font = self.font;
-        _labelPlaceholder.textColor = _placeHolderTextColor;
+        _labelPlaceholder.textColor = _placeHolderColor;
         bottomLineView.frame  =  bottmLineFrame;
     }];
 
@@ -310,6 +329,20 @@
     self.labelPlaceholder.text = placeholder;
     [self textFieldDidEndEditing];
     
+}
+#pragma mark  UITextField Responder Overide
+-(BOOL)becomeFirstResponder {
+
+    BOOL result = [super becomeFirstResponder];
+    [self textFieldDidBeginEditing];
+    return result;
+}
+
+-(BOOL)resignFirstResponder {
+
+    BOOL result = [super resignFirstResponder];
+    [self textFieldDidEndEditing];
+    return result;
 }
 
 @end

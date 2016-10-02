@@ -17,6 +17,10 @@ UITextfield class to float the Placeholder and customize the placeholder while e
 
 Download the Sample and drag & drop the ACFloatingTextField.h and ACFloatingTextField.m in your project.
 
+## What's New
+
+Releasing Swift Version of ACFloating TextField.
+
 ## How To Use.
 
 **1) Add Textfield From Storyboard in View Controller and Set the class to ACFloatingTextField or create the textfield programmatically.**
@@ -29,20 +33,20 @@ Download the Sample and drag & drop the ACFloatingTextField.h and ACFloatingText
 
 [(ACFloatingTextField *)textField setTextFieldPlaceholderText:@"Username"];
 
+OR
+
+acFloatingTextField.placeholder = @"";
+
 ```
 
-**4)Implement the UITextfield Delegate methods DidBeganEditing and DidEndEditing.**
+**4)Implement the UITextfield Delegate method.**
 
 ```objective-c
--(void)textFieldDidBeginEditing:(UITextField *)textField {
 
-[(ACFloatingTextField *)textField textFieldDidBeginEditing];
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
 
-}
-
--(void)textFieldDidEndEditing:(UITextField *)textField {
-
-[(ACFloatingTextField *)textField textFieldDidEndEditing];
+[textField resignFirstResponder];
+return YES;
 
 }
 
@@ -81,6 +85,8 @@ _textField.placeHolderTextColor = [UIColor redColor];
 _textField.selectedPlaceHolderTextColor = [UIColor greenColor];
 
 ```
+
+**5) Change lineColor, selectedLineColor , placeHolderColor & selectedPlaceHolderColor From Storyboard in Swift version.
 
 ## Communication
 
