@@ -86,7 +86,7 @@ _textField.selectedPlaceHolderTextColor = [UIColor greenColor];
 
 ```
 
-**5) Change lineColor, selectedLineColor , placeHolderColor & selectedPlaceHolderColor From Storyboard in Swift version.
+**5) Change lineColor, selectedLineColor , placeHolderColor & selectedPlaceHolderColor From Storyboard in Swift version.**
 
 ## Communication
 
