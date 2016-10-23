@@ -49,7 +49,7 @@ pod "ACFloatingTextfield"
 <pre><code>$ open *.xcworkspace 
 </code></pre>
 
-
+**Manual Installation**
 
 Download the Sample and drag & drop the ACFloatingTextField.h and ACFloatingTextField.m in your project.
 
