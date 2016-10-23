@@ -11,7 +11,6 @@
 
 @interface ViewController ()<UITextFieldDelegate>
 {
-
     ACFloatingTextField *tf_;
 }
 @property (weak, nonatomic) IBOutlet ACFloatingTextField *textField;

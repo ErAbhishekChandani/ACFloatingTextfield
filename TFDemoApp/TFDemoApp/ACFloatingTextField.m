@@ -20,7 +20,7 @@
 
 #pragma mark :- Loading From NIB
 -(void)awakeFromNib {
-    
+    [super awakeFromNib];
     [self initialization];
     
 }
@@ -70,6 +70,7 @@
 
 -(void)initialization{
     
+    self.clipsToBounds = true;
     //HIDE DEFAULT PLACEHOLDER LABEL OF UITEXTFIELD
     
     [self checkForDefaulLabel];
