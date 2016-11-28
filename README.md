@@ -28,7 +28,7 @@ You can install it with the following command:</p>
 
 <p>To integrate ACFloatingTextfield into your Xcode project using <a href="http://cocoapods.org">CocoaPods</a>, simply add the following line to your <code>Podfile</code>:</p>
 
-<div class="highlight highlight-source-ruby"><pre>pod <span class="pl-s"><span class="pl-pds">"</span>ACFloatingTextfield<span class="pl-pds">"</span></span></pre></div>
+<div class="highlight highlight-source-ruby"><pre>pod <span class="pl-s"><span class="pl-pds">"</span>“ACFloatingTextfield-Objc” , :git => 'https://github.com/ErAbhishekChandani/ACFloatingTextfield.git'<span class="pl-pds">"</span></span></pre></div>
 
 <blockquote>
 <p>If you are using <code>Swift</code>, be sure to add <code>use_frameworks!</code> in your <code>Podfile</code> and set your target to iOS 8+:</p>
