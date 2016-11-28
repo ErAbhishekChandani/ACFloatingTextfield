@@ -13,7 +13,7 @@
 		4646CED21D25500800D4F1E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4646CED01D25500800D4F1E0 /* Main.storyboard */; };
 		4646CED41D25500800D4F1E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4646CED31D25500800D4F1E0 /* Assets.xcassets */; };
 		4646CED71D25500800D4F1E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4646CED51D25500800D4F1E0 /* LaunchScreen.storyboard */; };
-		4646CEE01D25501B00D4F1E0 /* ACFloatingTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4646CEDF1D25501B00D4F1E0 /* ACFloatingTextField.m */; };
+		E2CB37F91DECB83B00F2A8EA /* ACFloatingTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = E2CB37F81DECB83B00F2A8EA /* ACFloatingTextField.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,8 +27,8 @@
 		4646CED31D25500800D4F1E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4646CED61D25500800D4F1E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4646CED81D25500800D4F1E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4646CEDE1D25501B00D4F1E0 /* ACFloatingTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACFloatingTextField.h; sourceTree = "<group>"; };
-		4646CEDF1D25501B00D4F1E0 /* ACFloatingTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACFloatingTextField.m; sourceTree = "<group>"; };
+		E2CB37F71DECB83B00F2A8EA /* ACFloatingTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACFloatingTextField.h; path = "../../Source-Objc/ACFloatingTextField.h"; sourceTree = "<group>"; };
+		E2CB37F81DECB83B00F2A8EA /* ACFloatingTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ACFloatingTextField.m; path = "../../Source-Objc/ACFloatingTextField.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,8 +87,8 @@
 		4646CEE11D25502200D4F1E0 /* TF */ = {
 			isa = PBXGroup;
 			children = (
-				4646CEDE1D25501B00D4F1E0 /* ACFloatingTextField.h */,
-				4646CEDF1D25501B00D4F1E0 /* ACFloatingTextField.m */,
+				E2CB37F71DECB83B00F2A8EA /* ACFloatingTextField.h */,
+				E2CB37F81DECB83B00F2A8EA /* ACFloatingTextField.m */,
 			);
 			name = TF;
 			sourceTree = "<group>";
@@ -164,9 +164,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				4646CECF1D25500800D4F1E0 /* ViewController.m in Sources */,
+				E2CB37F91DECB83B00F2A8EA /* ACFloatingTextField.m in Sources */,
 				4646CECC1D25500800D4F1E0 /* AppDelegate.m in Sources */,
 				4646CEC91D25500800D4F1E0 /* main.m in Sources */,
-				4646CEE01D25501B00D4F1E0 /* ACFloatingTextField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

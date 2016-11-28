@@ -7,15 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E2CB37FB1DECB8AF00F2A8EA /* ACFloatingTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CB37FA1DECB8AF00F2A8EA /* ACFloatingTextfield.swift */; };
 		E2EEF62D1D4E6D7E00FD86A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EEF62C1D4E6D7E00FD86A5 /* AppDelegate.swift */; };
 		E2EEF62F1D4E6D7E00FD86A5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EEF62E1D4E6D7E00FD86A5 /* ViewController.swift */; };
 		E2EEF6321D4E6D7E00FD86A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2EEF6301D4E6D7E00FD86A5 /* Main.storyboard */; };
 		E2EEF6341D4E6D7E00FD86A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2EEF6331D4E6D7E00FD86A5 /* Assets.xcassets */; };
 		E2EEF6371D4E6D7E00FD86A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2EEF6351D4E6D7E00FD86A5 /* LaunchScreen.storyboard */; };
-		E2EEF6401D4E6DD200FD86A5 /* ACFloatingTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EEF63F1D4E6DD200FD86A5 /* ACFloatingTextfield.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E2CB37FA1DECB8AF00F2A8EA /* ACFloatingTextfield.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ACFloatingTextfield.swift; path = "../../Source-Swift/ACFloatingTextfield.swift"; sourceTree = "<group>"; };
 		E2EEF6291D4E6D7E00FD86A5 /* ACFloatingTextField.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ACFloatingTextField.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2EEF62C1D4E6D7E00FD86A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E2EEF62E1D4E6D7E00FD86A5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -23,7 +24,6 @@
 		E2EEF6331D4E6D7E00FD86A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E2EEF6361D4E6D7E00FD86A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E2EEF6381D4E6D7E00FD86A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E2EEF63F1D4E6DD200FD86A5 /* ACFloatingTextfield.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ACFloatingTextfield.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,7 +70,7 @@
 		E2EEF63E1D4E6DB700FD86A5 /* Textfield */ = {
 			isa = PBXGroup;
 			children = (
-				E2EEF63F1D4E6DD200FD86A5 /* ACFloatingTextfield.swift */,
+				E2CB37FA1DECB8AF00F2A8EA /* ACFloatingTextfield.swift */,
 			);
 			name = Textfield;
 			sourceTree = "<group>";
@@ -147,7 +147,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2EEF62F1D4E6D7E00FD86A5 /* ViewController.swift in Sources */,
-				E2EEF6401D4E6DD200FD86A5 /* ACFloatingTextfield.swift in Sources */,
+				E2CB37FB1DECB8AF00F2A8EA /* ACFloatingTextfield.swift in Sources */,
 				E2EEF62D1D4E6D7E00FD86A5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
