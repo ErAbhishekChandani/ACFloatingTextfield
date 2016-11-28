@@ -36,7 +36,7 @@ You can install it with the following command:</p>
 
 <pre><code>platform :ios, '8.0'
 use_frameworks!
-pod "ACFloatingTextfield"
+pod “ACFloatingTextfield-Objc” , :git => 'https://github.com/ErAbhishekChandani/ACFloatingTextfield.git'
 </code></pre>
 
 <p>Then, run the following command from Terminal:</p>
