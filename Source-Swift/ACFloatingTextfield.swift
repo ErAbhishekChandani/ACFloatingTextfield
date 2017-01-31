@@ -15,11 +15,11 @@ class ACFloatingTextfield: UITextField {
     
      @IBInspectable  var disableFloatingLabel : Bool = false
     
-     @IBInspectable  var lineColor : UIColor = UIColor.blackColor()
+     @IBInspectable  var lineColor : UIColor = UIColor.black
     
      @IBInspectable  var selectedLineColor : UIColor = UIColor(red: 19/256.0, green: 141/256.0, blue: 117/256.0, alpha: 1.0)
     
-     @IBInspectable  var placeHolderColor : UIColor = UIColor.lightGrayColor()
+     @IBInspectable  var placeHolderColor : UIColor = UIColor.lightGray
     
      @IBInspectable  var selectedPlaceHolderColor : UIColor = UIColor(red: 19/256.0, green: 141/256.0, blue: 117/256.0, alpha: 1.0)
     
@@ -34,10 +34,10 @@ class ACFloatingTextfield: UITextField {
     }
     
     //MARK:- UITtextfield Draw Method Override
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         
-        super.drawRect(rect)
-        self.upadteTextField(CGRectMake(CGRectGetMinX(self.frame), CGRectGetMinY(self.frame), CGRectGetWidth(rect), CGRectGetHeight(rect)));
+        super.draw(rect)
+        self.upadteTextField(frame: CGRect(x:self.frame.minX, y:self.frame.minY, width:rect.width, height:rect.height));
 
     }
 
@@ -62,12 +62,12 @@ class ACFloatingTextfield: UITextField {
     }
 
     // MARK:- Text Rect Management
-    override func textRectForBounds(bounds: CGRect) -> CGRect {
-        return CGRectMake(4, 4, bounds.size.width, bounds.size.height);
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        return CGRect(x:4, y:4, width:bounds.size.width, height:bounds.size.height);
     }
 
-    override func editingRectForBounds(bounds: CGRect) -> CGRect {
-        return CGRectMake(4, 4, bounds.size.width, bounds.size.height);
+    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return CGRect(x:4, y:4, width:bounds.size.width, height:bounds.size.height);
     }
 
     //MARK:- ACFLoating Initialzation.
@@ -95,7 +95,7 @@ class ACFloatingTextfield: UITextField {
         bottomLineView?.removeFromSuperview()
 
         //Bottom Line UIView Configuration.
-        bottomLineView = UIView(frame: CGRectMake(0, CGRectGetHeight(self.frame)-1, CGRectGetWidth(self.frame), 2))
+        bottomLineView = UIView(frame: CGRect(x:0, y:self.frame.height-1, width:self.frame.width, height:2))
         bottomLineView?.backgroundColor = lineColor;
         bottomLineView?.tag = 20;
         
@@ -115,7 +115,7 @@ class ACFloatingTextfield: UITextField {
             placeholderText = self.placeholder!
         }
         
-        labelPlaceholder = UILabel(frame: CGRectMake(5, 0, self.frame.size.width-5, CGRectGetHeight(self.frame)))
+        labelPlaceholder = UILabel(frame: CGRect(x:5, y:0, width:self.frame.size.width-5, height:self.frame.height))
         labelPlaceholder?.text = placeholderText
         labelPlaceholder?.textAlignment = self.textAlignment
         labelPlaceholder?.textColor = placeHolderColor
@@ -135,7 +135,7 @@ class ACFloatingTextfield: UITextField {
         
         for aView in self.subviews {
             
-            if aView.isKindOfClass(UILabel) {
+            if aView is UILabel {
                 
                 if aView.tag != 21 {
                     
@@ -146,9 +146,9 @@ class ACFloatingTextfield: UITextField {
         
         
         if self.text == nil || self.text == "" {
-            aLabelView?.hidden = true;
+            aLabelView?.isHidden = true;
         }else{
-            aLabelView?.hidden = false;
+            aLabelView?.isHidden = false;
         }
         
     }
@@ -156,21 +156,21 @@ class ACFloatingTextfield: UITextField {
     //MARK:- Float & Resign
    private func floatTheLabel() -> Void {
         
-        if self.text == "" && self.isFirstResponder() {
+        if self.text == "" && self.isFirstResponder {
             
-            floatPlaceHolder(true)
+            floatPlaceHolder(selected: true)
             
-        }else if self.text == "" && !self.isFirstResponder() {
+        }else if self.text == "" && !self.isFirstResponder {
             
             resignPlaceholder()
             
-        }else if self.text != "" && !self.isFirstResponder()  {
+        }else if self.text != "" && !self.isFirstResponder  {
             
-            floatPlaceHolder(false)
+            floatPlaceHolder(selected: false)
             
-        }else if self.text != "" && self.isFirstResponder() {
+        }else if self.text != "" && self.isFirstResponder {
             
-            floatPlaceHolder(true)
+            floatPlaceHolder(selected: true)
         }
         
        self.checkForDefaulLabel()
@@ -187,11 +187,11 @@ class ACFloatingTextfield: UITextField {
 
         
         var bottomLineFrame = bottomLineView?.frame
-        bottomLineFrame?.origin.y = CGRectGetHeight(self.frame)-2
+        bottomLineFrame?.origin.y = self.frame.height-2
         
         if disableFloatingLabel {
-            labelPlaceholder?.hidden = true
-            UIView.animateWithDuration(0.2, animations: {
+            labelPlaceholder?.isHidden = true
+            UIView.animate(withDuration: 0.2, animations: {
                 self.bottomLineView?.frame = bottomLineFrame!
             })
             
@@ -209,12 +209,12 @@ class ACFloatingTextfield: UITextField {
         } else {
         
             bottomLineView?.backgroundColor = lineColor;
-            bottomLineFrame?.origin.y = CGRectGetHeight(self.frame)-1
+            bottomLineFrame?.origin.y = self.frame.height-1
             self.labelPlaceholder?.textColor = self.placeHolderColor;
 
         }
         
-        UIView.animateWithDuration(0.2, animations: {
+        UIView.animate(withDuration: 0.2, animations: {
             
             self.labelPlaceholder?.frame = labelFrame!;
             self.labelPlaceholder?.font = UIFont(name: (self.font?.fontName)!, size: 12)
@@ -228,25 +228,25 @@ class ACFloatingTextfield: UITextField {
     private func resignPlaceholder() -> Void {
         
         var bottomLineFrame = bottomLineView?.frame
-        bottomLineFrame?.origin.y = CGRectGetHeight(self.frame)-1
+        bottomLineFrame?.origin.y = self.frame.height-1
 
         
         bottomLineView?.backgroundColor = lineColor;
         
         if disableFloatingLabel {
-            labelPlaceholder?.hidden = false
+            labelPlaceholder?.isHidden = false
             self.labelPlaceholder?.textColor = self.placeHolderColor;
 
-            UIView.animateWithDuration(0.2, animations: {
+            UIView.animate(withDuration: 0.2, animations: {
                 self.bottomLineView?.frame = bottomLineFrame!
             })
             
             return
         }
         
-        let labelFrame = CGRectMake(5, 0, self.frame.size.width-5, self.frame.size.height)
+        let labelFrame = CGRect(x:5, y:0, width:self.frame.size.width-5, height:self.frame.size.height)
         
-        UIView.animateWithDuration(0.2, animations: {
+        UIView.animate(withDuration: 0.2, animations: {
             self.labelPlaceholder?.frame = labelFrame;
             self.labelPlaceholder?.font = self.font
             self.labelPlaceholder?.textColor = self.placeHolderColor;

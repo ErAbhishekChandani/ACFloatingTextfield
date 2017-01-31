@@ -1,5 +1,9 @@
 # ACFloatingTextField
 
+[![Version](https://img.shields.io/cocoapods/v/ACFloatingTextfield-Objc.svg?style=flat)](https://cocoapods.org/pods/ACFloatingTextfield-Objc)
+[![License](https://img.shields.io/cocoapods/l/ACFloatingTextfield-Objc.svg?style=flat)](https://cocoapods.org/pods/ACFloatingTextfield-Objc)
+[![Platform](https://img.shields.io/cocoapods/p/ACFloatingTextfield-Objc.svg?style=flat)](https://cocoapods.org/pods/ACFloatingTextfield-Objc)
+
 UITextfield class to float the Placeholder and customize the placeholder while editing.
 
 ## Features
@@ -7,7 +11,8 @@ UITextfield class to float the Placeholder and customize the placeholder while e
 - [x] Add Floating effect In UITextfield Placeholder.
 - [x] Change the Placeholder Text Color.
 - [x] Change the Placeholder Text Color when UITextfield begins editing.
-- [x] Add bottom line in UITextfield.
+- [x] Add bottom line in 
+.
 - [x] Change the bottom line color.
 - [x] Change the bottom line color when UITextfield begins editing.
 - [ ] The best is yet to come.
@@ -91,19 +96,19 @@ return YES;
 
 ##Customization
 
-**1) Change the colour of Bottom Line.** 
+**1) Change the color of Bottom Line.** 
 
 ```objective-c
 
-_textField.btmLineColor = [UIColor blueColor];
+_textField.lineColor = [UIColor blueColor];
 
 ```
 
-**2) Change the selected State colour for Bottom Line.**
+**2) Change the selected State color for Bottom Line.**
 
 ```objective-c
 
-_textField.btmLineSelectionColor = [UIColor orangeColor];
+_textField.selectedLineColor = [UIColor orangeColor];
 
 ```
 

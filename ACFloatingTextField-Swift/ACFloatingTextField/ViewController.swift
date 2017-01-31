@@ -15,20 +15,20 @@ class ViewController: UIViewController ,UITextFieldDelegate {
         super.viewDidLoad()
         
         let aTextField = ACFloatingTextfield()
-        aTextField.frame = CGRectMake(20, 300, CGRectGetWidth(UIScreen.mainScreen().bounds)-40, 45)
+        aTextField.frame = CGRect(x:20, y:300, width:UIScreen.main.bounds.width-40, height:45)
         aTextField.delegate = self
         aTextField.placeholder = "Password"
         self.view.addSubview(aTextField)
         // Do any additional setup after loading the view, typically from a nib.
     }
     
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
          textField.resignFirstResponder()
         return true
     }

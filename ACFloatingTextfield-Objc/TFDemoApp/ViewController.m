@@ -30,27 +30,16 @@
     
     
     tf_ = [[ACFloatingTextField alloc]initWithFrame:CGRectMake(20, 300, CGRectGetWidth([UIScreen mainScreen].bounds)-40, 45)];
-    tf_.delegate = self;
     
     [tf_ setTextFieldPlaceholderText:@"Placeholder"];
-
+    [tf_ setText:@"Abhishek"];
+    tf_.text = @"Chandani";
     [self.view addSubview:tf_];
-    // Do any additional setup after loading the view, typically from a nib.
+    
 }
 
 #pragma mark  UITextfield Delegates
--(void)textFieldDidBeginEditing:(UITextField *)textField {
 
-}
--(void)textFieldDidEndEditing:(UITextField *)textField {
-    
-}
-
--(BOOL)textFieldShouldReturn:(UITextField *)textField {
-
-    [textField resignFirstResponder];
-    return YES;
-}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
