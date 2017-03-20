@@ -33,6 +33,7 @@
 
 -(void)setTextFieldPlaceholderText:(NSString *)placeholderText;
 -(void)setTextFieldErrorPlaceholderText:(NSString *)errorPlaceholderText;
--(void)upadteTextField:(CGRect)frame;
+-(void)updateTextField:(CGRect)frame;
+
 
 @end

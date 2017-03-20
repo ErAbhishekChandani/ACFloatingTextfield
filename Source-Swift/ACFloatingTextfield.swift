@@ -8,25 +8,25 @@
 
 import UIKit
 
-class ACFloatingTextfield: UITextField {
+open class ACFloatingTextfield: UITextField {
 
      private var bottomLineView : UIView?
      private var labelPlaceholder : UILabel?
     
-     @IBInspectable  var disableFloatingLabel : Bool = false
+     @IBInspectable open var disableFloatingLabel : Bool = false
     
-     @IBInspectable  var lineColor : UIColor = UIColor.black
+     @IBInspectable open var lineColor : UIColor = UIColor.black
     
-     @IBInspectable  var selectedLineColor : UIColor = UIColor(red: 19/256.0, green: 141/256.0, blue: 117/256.0, alpha: 1.0)
+     @IBInspectable open var selectedLineColor : UIColor = UIColor(red: 19/256.0, green: 141/256.0, blue: 117/256.0, alpha: 1.0)
     
-     @IBInspectable  var placeHolderColor : UIColor = UIColor.lightGray
+     @IBInspectable open var placeHolderColor : UIColor = UIColor.lightGray
     
-     @IBInspectable  var selectedPlaceHolderColor : UIColor = UIColor(red: 19/256.0, green: 141/256.0, blue: 117/256.0, alpha: 1.0)
+     @IBInspectable open var selectedPlaceHolderColor : UIColor = UIColor(red: 19/256.0, green: 141/256.0, blue: 117/256.0, alpha: 1.0)
     
     
     
     //MARK:- Set Text
-    override var text:String?  {
+    override open var text:String?  {
         didSet {
             floatTheLabel()
             checkForDefaulLabel()
@@ -34,7 +34,7 @@ class ACFloatingTextfield: UITextField {
     }
     
     //MARK:- UITtextfield Draw Method Override
-    override func draw(_ rect: CGRect) {
+    override open func draw(_ rect: CGRect) {
         
         super.draw(rect)
         self.upadteTextField(frame: CGRect(x:self.frame.minX, y:self.frame.minY, width:rect.width, height:rect.height));
@@ -42,31 +42,31 @@ class ACFloatingTextfield: UITextField {
     }
 
     // MARK:- Loading From NIB
-    override func awakeFromNib() {
+    override open func awakeFromNib() {
         
         super.awakeFromNib()
          self.initialize()
     }
     
     // MARK:- Intialization
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         
         super.init(frame: frame)
         self.initialize()
     
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required public init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
         self.initialize()
     }
 
     // MARK:- Text Rect Management
-    override func textRect(forBounds bounds: CGRect) -> CGRect {
+    override open func textRect(forBounds bounds: CGRect) -> CGRect {
         return CGRect(x:4, y:4, width:bounds.size.width, height:bounds.size.height);
     }
 
-    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+    override open func editingRect(forBounds bounds: CGRect) -> CGRect {
         return CGRect(x:4, y:4, width:bounds.size.width, height:bounds.size.height);
     }
 
@@ -267,14 +267,14 @@ class ACFloatingTextfield: UITextField {
     }
 
     //MARK:- UITextfield Becomes First Responder
-    override func becomeFirstResponder() -> Bool {
+    override open func becomeFirstResponder() -> Bool {
         let result = super.becomeFirstResponder()
         self.textFieldDidBeginEditing()
         return result
     }
     
     //MARK:- UITextfield Resigns Responder
-    override func resignFirstResponder() -> Bool {
+    override open func resignFirstResponder() -> Bool {
         let result =  super.resignFirstResponder()
         self.textFieldDidEndEditing()
         return result

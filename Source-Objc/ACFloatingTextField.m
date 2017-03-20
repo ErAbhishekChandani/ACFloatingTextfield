@@ -14,7 +14,7 @@
 #pragma mark :- Drawing Methods
 -(void)drawRect:(CGRect)rect {
     
-    [self upadteTextField:CGRectMake(CGRectGetMinX(self.frame), CGRectGetMinY(self.frame), CGRectGetWidth(rect), CGRectGetHeight(rect))];
+    [self updateTextField:CGRectMake(CGRectGetMinX(self.frame), CGRectGetMinY(self.frame), CGRectGetWidth(rect), CGRectGetHeight(rect))];
     
 }
 
@@ -249,8 +249,8 @@
     
 }
 
-#pragma mark  Upadte and Manage Subviews
--(void)upadteTextField:(CGRect )frame {
+#pragma mark  Update and Manage Subviews
+-(void)updateTextField:(CGRect )frame {
     
     self.frame = frame;
     [self initialization];
