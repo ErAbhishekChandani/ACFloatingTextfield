@@ -13,15 +13,15 @@ open class ACFloatingTextfield: UITextField {
      private var bottomLineView : UIView?
      private var labelPlaceholder : UILabel?
     
-     @IBInspectable  var disableFloatingLabel : Bool = false
+     @IBInspectable open var disableFloatingLabel : Bool = false
     
-     @IBInspectable  var lineColor : UIColor = UIColor.black
+     @IBInspectable open var lineColor : UIColor = UIColor.black
     
-     @IBInspectable  var selectedLineColor : UIColor = UIColor(red: 19/256.0, green: 141/256.0, blue: 117/256.0, alpha: 1.0)
+     @IBInspectable open var selectedLineColor : UIColor = UIColor(red: 19/256.0, green: 141/256.0, blue: 117/256.0, alpha: 1.0)
     
-     @IBInspectable  var placeHolderColor : UIColor = UIColor.lightGray
+     @IBInspectable open var placeHolderColor : UIColor = UIColor.lightGray
     
-     @IBInspectable  var selectedPlaceHolderColor : UIColor = UIColor(red: 19/256.0, green: 141/256.0, blue: 117/256.0, alpha: 1.0)
+     @IBInspectable open var selectedPlaceHolderColor : UIColor = UIColor(red: 19/256.0, green: 141/256.0, blue: 117/256.0, alpha: 1.0)
     
     
     
@@ -49,7 +49,7 @@ open class ACFloatingTextfield: UITextField {
     }
     
     // MARK:- Intialization
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         
         super.init(frame: frame)
         self.initialize()
