@@ -26,6 +26,6 @@
 -(instancetype)initWithFrame:(CGRect)frame;
 
 -(void)setTextFieldPlaceholderText:(NSString *)placeholderText;
--(void)upadteTextField:(CGRect)frame;
+-(void)updateTextField:(CGRect)frame;
 
 @end
