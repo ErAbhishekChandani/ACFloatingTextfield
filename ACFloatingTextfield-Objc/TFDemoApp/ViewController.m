@@ -11,13 +11,21 @@
 
 @interface ViewController ()<UITextFieldDelegate>
 {
-    ACFloatingTextField *tf_;
+    ACFloatingTextField *tf_, *tf_2;
 }
 @property (weak, nonatomic) IBOutlet ACFloatingTextField *textField;
+@property (weak, nonatomic) IBOutlet UIStackView *containerForTexts;
 
 @end
 
 @implementation ViewController
+
+- (IBAction)showErrorTap:(UIButton *)sender {
+
+    [tf_ setErrorPlaceholder:@"You can not write do this!"];
+    [_textField setErrorPlaceholder:@"Haaa"];
+    [tf_2 setErrorPlaceholder:@"No crejo"];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -29,12 +37,18 @@
     _textField.lineColor = [UIColor blueColor];
     
     
-    tf_ = [[ACFloatingTextField alloc]initWithFrame:CGRectMake(20, 300, CGRectGetWidth([UIScreen mainScreen].bounds)-40, 45)];
-    
+    tf_ = [[ACFloatingTextField alloc] init];
     [tf_ setTextFieldPlaceholderText:@"Placeholder"];
     [tf_ setText:@"Abhishek"];
     tf_.text = @"Chandani";
-    [self.view addSubview:tf_];
+    [self.containerForTexts addArrangedSubview:tf_];
+    
+    
+    tf_2 = [[ACFloatingTextField alloc] init];
+    [tf_2 setTextFieldPlaceholderText:@"Placeholder"];
+    [tf_2 setText:@"Abhishek"];
+
+    [self.containerForTexts addArrangedSubview:tf_2];
     
 }
 

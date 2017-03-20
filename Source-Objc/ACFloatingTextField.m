@@ -97,6 +97,16 @@
         _selectedLineColor = [UIColor colorWithRed:19/256.0 green:141/256.0 blue:117/256.0 alpha:1.0];
     }
     
+    //5. Bottom line error Color.
+    if (_errorLineColor==nil) {
+        _errorLineColor = [UIColor redColor];
+    }
+    
+    //6. Bottom place Color When show error.
+    if (_errorPlaceHolderColor==nil) {
+        _errorPlaceHolderColor = [UIColor redColor];
+    }
+    
     /// Adding Bottom Line View.
     [self addBottomLineView];
     
@@ -141,6 +151,71 @@
     [self addSubview:_labelPlaceholder];
 
 }
+
+-(void)addErrorPlaceholderLabel{
+    
+    [self endEditing:YES];
+    
+    [_labelErrorPlaceholder removeFromSuperview];
+    
+    if ([_errorPlaceholder isEqualToString:@""]&&_errorPlaceholder==nil) {
+       _errorPlaceholder = @"Error";
+    }
+    
+    _labelErrorPlaceholder = [[UILabel alloc] initWithFrame:self.labelPlaceholder.frame];
+    _labelErrorPlaceholder.text = _errorPlaceholder;
+    _labelErrorPlaceholder.textAlignment = self.textAlignment;
+    _labelErrorPlaceholder.textColor = _errorPlaceHolderColor;
+    _labelErrorPlaceholder.font = [UIFont fontWithName:self.font.fontName size:12];
+    CGRect frameError = _labelErrorPlaceholder.frame;
+    frameError.size.height = 12;
+    frameError.origin.y = self.bounds.size.height - frameError.size.height;
+    
+    _labelErrorPlaceholder.frame = frameError;
+    
+    [self addSubview:_labelErrorPlaceholder];
+    
+    [self showErrorPlaceHolder];
+}
+-(void)showErrorPlaceHolder{
+    
+    
+    _disableFloatingErrorLabel = NO;
+    
+    CGRect bottmLineFrame = bottomLineView.frame;
+    bottmLineFrame.origin.y = _labelErrorPlaceholder.frame.origin.y-1;
+    
+    _labelErrorPlaceholder.alpha = 0;
+    _labelErrorPlaceholder.frame = CGRectMake(_labelErrorPlaceholder.frame.origin.x, _labelErrorPlaceholder.frame.origin.y-5, _labelErrorPlaceholder.frame.size.width, _labelErrorPlaceholder.frame.size.height);
+    
+    CGRect labelErrorFrame = _labelErrorPlaceholder.frame;
+    labelErrorFrame.origin.y = labelErrorFrame.origin.y + 6;
+    
+    
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        bottomLineView.frame  =  bottmLineFrame;
+        bottomLineView.backgroundColor = _errorLineColor;
+        _labelErrorPlaceholder.alpha = 1;
+        _labelErrorPlaceholder.frame = labelErrorFrame;
+
+    }];
+  
+}
+
+-(void)hideErrorPlaceHolder{
+    
+    CGRect labelErrorFrame = _labelErrorPlaceholder.frame;
+    labelErrorFrame.origin.y = labelErrorFrame.origin.y - 6;
+
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        _labelErrorPlaceholder.alpha = 0;
+        _labelErrorPlaceholder.frame = labelErrorFrame;
+    }];
+    
+}
+
 /// Hadling The Default Placeholder Label
 -(void)checkForDefaulLabel{
     
@@ -174,7 +249,7 @@
     
 }
 
-#pragma mark  Upadate and Manage Subviews
+#pragma mark  Upadte and Manage Subviews
 -(void)upadteTextField:(CGRect )frame {
     
     self.frame = frame;
@@ -186,11 +261,15 @@
     
     if (selected) {
         
+        _disableFloatingErrorLabel = YES;
+        [self hideErrorPlaceHolder];
+        
         bottomLineView.backgroundColor = _selectedLineColor;
         
         if (self.disableFloatingLabel){
             
             _labelPlaceholder.hidden = YES;
+            
             CGRect bottmLineFrame = bottomLineView.frame;
             bottmLineFrame.origin.y = CGRectGetHeight(self.frame)-2;
             [UIView animateWithDuration:0.2 animations:^{
@@ -216,7 +295,10 @@
     }
     else{
         
+       
+        
         bottomLineView.backgroundColor = _lineColor;
+        
         
         if (self.disableFloatingLabel){
             
@@ -297,19 +379,19 @@
 
 -(void)floatTheLabel{
     
-    if ([self.text isEqualToString:@""]&&self.isFirstResponder) {
+    if ([self.text isEqualToString:@""] && self.isFirstResponder) {
         
         [self floatPlaceHolder:YES];
         
-    }else if ([self.text isEqualToString:@""]&&!self.isFirstResponder) {
+    }else if ([self.text isEqualToString:@""] && !self.isFirstResponder) {
     
         [self resignPlaceholder];
         
-    }else if (![self.text isEqualToString:@""]&&!self.isFirstResponder) {
+    }else if (![self.text isEqualToString:@""] && !self.isFirstResponder) {
         
         [self floatPlaceHolder:NO];
         
-    }else if (![self.text isEqualToString:@""]&&self.isFirstResponder) {
+    }else if (![self.text isEqualToString:@""] && self.isFirstResponder) {
         
         [self floatPlaceHolder:YES];
     }
@@ -331,6 +413,20 @@
     [self textFieldDidEndEditing];
     
 }
+
+#pragma mark  Set Placeholder Text On Error Labels
+-(void)setTextFieldErrorPlaceholderText:(NSString *)errorPlaceholderText {
+    
+    _errorPlaceholder = errorPlaceholderText;
+    
+    self.labelErrorPlaceholder.text = errorPlaceholderText;
+    [self textFieldDidEndEditing];
+}
+-(void)setErrorPlaceholder:(NSString *)errorPlaceholderText {
+    _errorPlaceholder = errorPlaceholderText;
+    [self addErrorPlaceholderLabel];
+}
+
 #pragma mark  UITextField Responder Overide
 -(BOOL)becomeFirstResponder {
 

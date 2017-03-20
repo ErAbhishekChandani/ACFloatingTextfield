@@ -1,8 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -14,22 +18,27 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="esm-MK-bHO" customClass="ACFloatingTextField">
-                                <rect key="frame" x="20" y="220" width="560" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="jtb-wV-bkr"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="h5y-ru-aOx"/>
-                                </connections>
-                            </textField>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="QGB-sc-5Xk">
+                                <rect key="frame" x="10" y="220" width="355" height="50"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="esm-MK-bHO" customClass="ACFloatingTextField">
+                                        <rect key="frame" x="0.0" y="0.0" width="355" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="jtb-wV-bkr"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="h5y-ru-aOx"/>
+                                        </connections>
+                                    </textField>
+                                </subviews>
+                            </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ACFloatingTextField" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u6L-Au-NWD">
-                                <rect key="frame" x="157" y="89" width="286" height="53"/>
+                                <rect key="frame" x="45" y="89" width="286" height="53"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="286" id="fht-pA-sE8"/>
                                     <constraint firstAttribute="height" constant="53" id="jQI-m8-qb4"/>
@@ -38,17 +47,27 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FD5-1T-i2L">
+                                <rect key="frame" x="149.5" y="310" width="76" height="30"/>
+                                <state key="normal" title="Show Error"/>
+                                <connections>
+                                    <action selector="showErrorTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="s5B-hi-snx"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="esm-MK-bHO" secondAttribute="trailing" constant="20" id="4FN-M9-Ocd"/>
-                            <constraint firstItem="esm-MK-bHO" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="200" id="WS6-ht-3Qt"/>
-                            <constraint firstItem="esm-MK-bHO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="XRB-HX-6sh"/>
+                            <constraint firstItem="QGB-sc-5Xk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3dG-2X-SsG"/>
+                            <constraint firstItem="FD5-1T-i2L" firstAttribute="top" secondItem="QGB-sc-5Xk" secondAttribute="bottom" constant="40" id="Dzl-rh-YF4"/>
+                            <constraint firstItem="FD5-1T-i2L" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="S9C-Uq-5Jv"/>
+                            <constraint firstItem="QGB-sc-5Xk" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" constant="-20" id="cOW-Z4-wNA"/>
+                            <constraint firstItem="QGB-sc-5Xk" firstAttribute="top" secondItem="u6L-Au-NWD" secondAttribute="bottom" constant="78" id="fLL-DU-Lnz"/>
                             <constraint firstItem="u6L-Au-NWD" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="odj-lK-7h1"/>
                             <constraint firstItem="u6L-Au-NWD" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="69" id="v1h-AM-Bqs"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="containerForTexts" destination="QGB-sc-5Xk" id="llq-r6-10H"/>
                         <outlet property="textField" destination="esm-MK-bHO" id="sTZ-YQ-8tZ"/>
                     </connections>
                 </viewController>
