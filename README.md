@@ -44,7 +44,7 @@ You can install it with the following command:</p>
 use_frameworks!
 pod “ACFloatingTextfield-Swift” , :git => 'https://github.com/ErAbhishekChandani/ACFloatingTextfield.git'
 
-# Import ACFloatintextField in swift with @import ACFloatingTextfield_Swift .
+You can import ACFloatintextField in swift with @import ACFloatingTextfield_Swift .
 </code></pre>
 
 <p>Then, run the following command from Terminal:</p>
