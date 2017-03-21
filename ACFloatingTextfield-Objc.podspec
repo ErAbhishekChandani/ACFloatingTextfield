@@ -12,7 +12,7 @@ ACFloatingTextfield is subclass of UITextfield class that floats and animate the
   s.license      = "MIT"
   s.author             = { "Abhishek" => "chandani.abhishek440@gmail.com" }
 
-  s.source       = { :git => "https://github.com/ErAbhishekChandani/ACFloatingTextfield.git", :tag => s.version }
+  s.source       = { :git => "https://github.com/mauker/ACFloatingTextfield.git" }
   s.source_files  = "Source-Objc/*.{h,m}"
   s.platform     = :ios
   s.platform     = :ios, "5.0"
