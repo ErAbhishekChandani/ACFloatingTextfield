@@ -43,6 +43,8 @@ You can install it with the following command:</p>
 <pre><code>platform :ios, '8.0'
 use_frameworks!
 pod “ACFloatingTextfield-Swift” , :git => 'https://github.com/ErAbhishekChandani/ACFloatingTextfield.git'
+
+# Import ACFloatintextField in swift with @import ACFloatingTextfield_Swift .
 </code></pre>
 
 <p>Then, run the following command from Terminal:</p>
@@ -57,11 +59,11 @@ pod “ACFloatingTextfield-Swift” , :git => 'https://github.com/ErAbhishekChan
 
 **Manual Installation**
 
-Download the Sample and drag & drop the ACFloatingTextField.h and ACFloatingTextField.m in your project.
+Download the Sample and drag & drop the ACFloatingTextField.h and ACFloatingTextField.m or if using swift drag ACFloatingTextfield.swift file in your project.
 
 ## What's New
 
-Releasing Swift Version of ACFloating TextField.
+ACFloatingTextfield now works with swift 3.x .
 
 ## How To Use.
 
