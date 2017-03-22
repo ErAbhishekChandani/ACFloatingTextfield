@@ -22,9 +22,9 @@
 
 - (IBAction)showErrorTap:(UIButton *)sender {
 
-    [tf_ setErrorPlaceholder:@"You can not write do this!"];
-    [_textField setErrorPlaceholder:@"Haaa"];
-    [tf_2 setErrorPlaceholder:@"No crejo"];
+    [tf_ setErrorPlaceholder:@"You can not write do this pick that!"];
+    [_textField setErrorPlaceholder:@"Haaa do you have a queue to put in progress!"];
+    [tf_2 setErrorPlaceholder:@"No crejo in questo"];
 }
 
 - (void)viewDidLoad {
