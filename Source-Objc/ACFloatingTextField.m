@@ -49,6 +49,12 @@
 
 #pragma mark :- Drawing Text Rect
 - (CGRect)textRectForBounds:(CGRect)bounds {
+    if(bottomLineView){
+        CGRect bottomFrame = bottomLineView.frame;
+        bottomFrame.size.width = self.frame.size.width;
+        
+        bottomLineView.frame = bottomFrame;
+    }
     return CGRectMake(4, 4, bounds.size.width, bounds.size.height);
 }
 
