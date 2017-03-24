@@ -21,10 +21,9 @@
 @implementation ViewController
 
 - (IBAction)showErrorTap:(UIButton *)sender {
-
-    [tf_ setErrorPlaceholder:@"You can not write do this!"];
-    [_textField setErrorPlaceholder:@"Haaa"];
-    [tf_2 setErrorPlaceholder:@"No crejo"];
+    [tf_ showError];
+    [tf_2 showErrorWithText:@"This is New Error"];
+    [_textField showError];
 }
 
 - (void)viewDidLoad {
@@ -35,8 +34,7 @@
     _textField.placeHolderColor = [UIColor redColor];
     _textField.selectedPlaceHolderColor = [UIColor greenColor];
     _textField.lineColor = [UIColor blueColor];
-    
-    
+
     tf_ = [[ACFloatingTextField alloc] init];
     [tf_ setTextFieldPlaceholderText:@"Placeholder"];
     [tf_ setText:@"Abhishek"];
@@ -49,7 +47,10 @@
     [tf_2 setText:@"Abhishek"];
 
     [self.containerForTexts addArrangedSubview:tf_2];
-    
+    tf_.errorText = @"You can not write do this!";
+    _textField.errorText = @"Haaa";
+    tf_2.errorText = @"No crejo";
+
 }
 
 #pragma mark  UITextfield Delegates
