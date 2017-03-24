@@ -8,25 +8,20 @@
 
 import UIKit
 
-@objc(ACFloatingTextfield)
-open class ACFloatingTextfield: UITextField {
+@IBDesignable
+@objc open class ACFloatingTextfield: UITextField {
 
      fileprivate var bottomLineView : UIView?
      fileprivate var labelPlaceholder : UILabel?
     
-     //Disable the floating lables by making this True :(
      @IBInspectable open var disableFloatingLabel : Bool = false
     
-     //Changes bottom line color :)
      @IBInspectable open var lineColor : UIColor = UIColor.black
     
-    //Changes bottom line color when selected :)
      @IBInspectable open var selectedLineColor : UIColor = UIColor(red: 19/256.0, green: 141/256.0, blue: 117/256.0, alpha: 1.0)
     
-    //Changes placeholder color :)
      @IBInspectable open var placeHolderColor : UIColor = UIColor.lightGray
     
-    //Changes placeholder color when selected :)
      @IBInspectable open var selectedPlaceHolderColor : UIColor = UIColor(red: 19/256.0, green: 141/256.0, blue: 117/256.0, alpha: 1.0)
     
     //MARK:- Set Text
@@ -39,19 +34,22 @@ open class ACFloatingTextfield: UITextField {
     
     //MARK:- UITtextfield Draw Method Override
     override open func draw(_ rect: CGRect) {
+        
         super.draw(rect)
         self.upadteTextField(frame: CGRect(x:self.frame.minX, y:self.frame.minY, width:rect.width, height:rect.height));
 
     }
-    
-    //MARK:- Loading From NIB
+
+    // MARK:- Loading From NIB
     override open func awakeFromNib() {
+        
         super.awakeFromNib()
          self.initialize()
     }
     
-    //MARK:- Intialization
+    // MARK:- Intialization
     override public init(frame: CGRect) {
+        
         super.init(frame: frame)
         self.initialize()
     
@@ -62,11 +60,11 @@ open class ACFloatingTextfield: UITextField {
         self.initialize()
     }
 
-    //MARK:- Text Rect Management
+    // MARK:- Text Rect Management
     override open func textRect(forBounds bounds: CGRect) -> CGRect {
         return CGRect(x:4, y:4, width:bounds.size.width, height:bounds.size.height);
     }
-    
+
     override open func editingRect(forBounds bounds: CGRect) -> CGRect {
         return CGRect(x:4, y:4, width:bounds.size.width, height:bounds.size.height);
     }
@@ -85,11 +83,11 @@ open class ACFloatingTextfield: UITextField {
         return result
     }
 
+
 }
 
-//MARK:- Private Methods
 fileprivate extension ACFloatingTextfield {
-
+    
     //MARK:- ACFLoating Initialzation.
     func initialize() -> Void {
         
@@ -98,7 +96,7 @@ fileprivate extension ACFloatingTextfield {
         
         /// Adding Bottom Line
         addBottomLine()
-
+        
         /// Placeholder Label Configuration.
         addFloatingLabel()
         
@@ -164,6 +162,7 @@ fileprivate extension ACFloatingTextfield {
             }
         }
         
+        
         if self.text == nil || self.text == "" {
             aLabelView?.isHidden = true;
         }else{
@@ -204,6 +203,7 @@ fileprivate extension ACFloatingTextfield {
     //MARK:- Float UITextfield Placeholder Label.
     func floatPlaceHolder(selected:Bool) -> Void {
         
+        
         var bottomLineFrame = bottomLineView?.frame
         bottomLineFrame?.origin.y = self.frame.height-2
         
@@ -212,6 +212,7 @@ fileprivate extension ACFloatingTextfield {
             UIView.animate(withDuration: 0.2, animations: {
                 self.bottomLineView?.frame = bottomLineFrame!
             })
+            
             return
         }
         
@@ -219,15 +220,20 @@ fileprivate extension ACFloatingTextfield {
         labelFrame?.size.height = 12
         
         if selected {
+            
             bottomLineView?.backgroundColor = selectedLineColor
             self.labelPlaceholder?.textColor = self.selectedPlaceHolderColor;
+            
         } else {
+            
             bottomLineView?.backgroundColor = lineColor;
             bottomLineFrame?.origin.y = self.frame.height-1
             self.labelPlaceholder?.textColor = self.placeHolderColor;
+            
         }
         
         UIView.animate(withDuration: 0.2, animations: {
+            
             self.labelPlaceholder?.frame = labelFrame!;
             self.labelPlaceholder?.font = UIFont(name: (self.font?.fontName)!, size: 12)
             self.bottomLineView?.frame  =  bottomLineFrame!;
@@ -241,6 +247,7 @@ fileprivate extension ACFloatingTextfield {
         
         var bottomLineFrame = bottomLineView?.frame
         bottomLineFrame?.origin.y = self.frame.height-1
+        
         
         bottomLineView?.backgroundColor = lineColor;
         
@@ -276,5 +283,4 @@ fileprivate extension ACFloatingTextfield {
     func textFieldDidEndEditing() -> Void {
         self.floatTheLabel()
     }
-
 }
