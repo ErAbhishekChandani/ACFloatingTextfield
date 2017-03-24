@@ -3,6 +3,7 @@
 [![Version](https://img.shields.io/cocoapods/v/ACFloatingTextfield-Objc.svg?style=flat)](https://cocoapods.org/pods/ACFloatingTextfield-Objc)
 [![License](https://img.shields.io/cocoapods/l/ACFloatingTextfield-Objc.svg?style=flat)](https://cocoapods.org/pods/ACFloatingTextfield-Objc)
 [![Platform](https://img.shields.io/cocoapods/p/ACFloatingTextfield-Objc.svg?style=flat)](https://cocoapods.org/pods/ACFloatingTextfield-Objc)
+[![Build Status](https://travis-ci.org/ErAbhishekChandani/ACFloatingTextfield.svg?branch=master)](https://travis-ci.org/ErAbhishekChandani/ACFloatingTextfield)
 
 UITextfield class to float the Placeholder and customize the placeholder while editing.
 
