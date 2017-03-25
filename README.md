@@ -1,5 +1,7 @@
 # ACFloatingTextField
 
+![ACFloatingTextfield](https://github.com/ErAbhishekChandani/ACFloatingTextfield/blob/master/ACFloatingField.png "ACFloatingTextfield")
+
 [![Version](https://img.shields.io/cocoapods/v/ACFloatingTextfield-Objc.svg?style=flat)](https://cocoapods.org/pods/ACFloatingTextfield-Objc)
 [![License](https://img.shields.io/cocoapods/l/ACFloatingTextfield-Objc.svg?style=flat)](https://cocoapods.org/pods/ACFloatingTextfield-Objc)
 [![Platform](https://img.shields.io/cocoapods/p/ACFloatingTextfield-Objc.svg?style=flat)](https://cocoapods.org/pods/ACFloatingTextfield-Objc)
