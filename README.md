@@ -21,6 +21,9 @@ UITextfield class to float the Placeholder and customize the placeholder while e
 - [x] Change bottom line color when UITextField show error.
 - [ ] The best is yet to come.
 
+## Preview
+
+![ACFloatingTextfieldGIF](https://github.com/ErAbhishekChandani/ACFloatingTextfield/blob/master/Example/ACFloatingTextifield.gif)
 
 ## Installation
 
