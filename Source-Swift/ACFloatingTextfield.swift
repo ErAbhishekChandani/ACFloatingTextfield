@@ -2,16 +2,17 @@
 //  ACFloatingTextfield.swift
 //  ACFloatingTextField
 //
-//  Created by Macintosh on 31/07/16.
+//  Created by Er Abhishek Chandani on 31/07/16.
 //  Copyright © 2016 Abhishek. All rights reserved.
 //
 
 import UIKit
 
-open class ACFloatingTextfield: UITextField {
+@IBDesignable
+@objc open class ACFloatingTextfield: UITextField {
 
-     private var bottomLineView : UIView?
-     private var labelPlaceholder : UILabel?
+     fileprivate var bottomLineView : UIView?
+     fileprivate var labelPlaceholder : UILabel?
     
      @IBInspectable open var disableFloatingLabel : Bool = false
     
@@ -22,8 +23,6 @@ open class ACFloatingTextfield: UITextField {
      @IBInspectable open var placeHolderColor : UIColor = UIColor.lightGray
     
      @IBInspectable open var selectedPlaceHolderColor : UIColor = UIColor(red: 19/256.0, green: 141/256.0, blue: 117/256.0, alpha: 1.0)
-    
-    
     
     //MARK:- Set Text
     override open var text:String?  {
@@ -70,6 +69,25 @@ open class ACFloatingTextfield: UITextField {
         return CGRect(x:4, y:4, width:bounds.size.width, height:bounds.size.height);
     }
 
+    //MARK:- UITextfield Becomes First Responder
+    override open func becomeFirstResponder() -> Bool {
+        let result = super.becomeFirstResponder()
+        self.textFieldDidBeginEditing()
+        return result
+    }
+    
+    //MARK:- UITextfield Resigns Responder
+    override open func resignFirstResponder() -> Bool {
+        let result =  super.resignFirstResponder()
+        self.textFieldDidEndEditing()
+        return result
+    }
+
+
+}
+
+fileprivate extension ACFloatingTextfield {
+    
     //MARK:- ACFLoating Initialzation.
     func initialize() -> Void {
         
@@ -86,14 +104,14 @@ open class ACFloatingTextfield: UITextField {
         if self.text != nil && self.text != "" {
             self.floatTheLabel()
         }
-
+        
     }
     
     //MARK:- ADD Bottom Line
-    private func addBottomLine(){
-    
+    func addBottomLine(){
+        
         bottomLineView?.removeFromSuperview()
-
+        
         //Bottom Line UIView Configuration.
         bottomLineView = UIView(frame: CGRect(x:0, y:self.frame.height-1, width:self.frame.width, height:2))
         bottomLineView?.backgroundColor = lineColor;
@@ -102,14 +120,14 @@ open class ACFloatingTextfield: UITextField {
         if bottomLineView != nil {
             self.addSubview(bottomLineView!)
         }
-
+        
     }
     
     //MARK:- ADD Floating Label
-    private func addFloatingLabel(){
-    
+    func addFloatingLabel(){
+        
         labelPlaceholder?.removeFromSuperview()
-
+        
         var placeholderText : String? = labelPlaceholder?.text
         if self.placeholder != nil && self.placeholder != "" {
             placeholderText = self.placeholder!
@@ -125,11 +143,11 @@ open class ACFloatingTextfield: UITextField {
         if labelPlaceholder != nil {
             self.addSubview(labelPlaceholder!)
         }
-
+        
     }
     
     // Checks The Default Placeholder Label
-   private func checkForDefaulLabel() -> Void {
+    func checkForDefaulLabel() -> Void {
         
         var aLabelView : UIView?
         
@@ -152,9 +170,9 @@ open class ACFloatingTextfield: UITextField {
         }
         
     }
-
+    
     //MARK:- Float & Resign
-   private func floatTheLabel() -> Void {
+    func floatTheLabel() -> Void {
         
         if self.text == "" && self.isFirstResponder {
             
@@ -173,18 +191,18 @@ open class ACFloatingTextfield: UITextField {
             floatPlaceHolder(selected: true)
         }
         
-       self.checkForDefaulLabel()
+        self.checkForDefaulLabel()
     }
     
     //MARK:- Upadate and Manage Subviews
-   private func upadteTextField(frame:CGRect) -> Void {
-         self.frame = frame;
-         self.initialize()
+    func upadteTextField(frame:CGRect) -> Void {
+        self.frame = frame;
+        self.initialize()
     }
-
+    
     //MARK:- Float UITextfield Placeholder Label.
-   private func floatPlaceHolder(selected:Bool) -> Void {
-
+    func floatPlaceHolder(selected:Bool) -> Void {
+        
         
         var bottomLineFrame = bottomLineView?.frame
         bottomLineFrame?.origin.y = self.frame.height-2
@@ -197,21 +215,21 @@ open class ACFloatingTextfield: UITextField {
             
             return
         }
-
+        
         var labelFrame = labelPlaceholder?.frame
         labelFrame?.size.height = 12
-
+        
         if selected {
             
             bottomLineView?.backgroundColor = selectedLineColor
             self.labelPlaceholder?.textColor = self.selectedPlaceHolderColor;
-        
+            
         } else {
-        
+            
             bottomLineView?.backgroundColor = lineColor;
             bottomLineFrame?.origin.y = self.frame.height-1
             self.labelPlaceholder?.textColor = self.placeHolderColor;
-
+            
         }
         
         UIView.animate(withDuration: 0.2, animations: {
@@ -220,23 +238,23 @@ open class ACFloatingTextfield: UITextField {
             self.labelPlaceholder?.font = UIFont(name: (self.font?.fontName)!, size: 12)
             self.bottomLineView?.frame  =  bottomLineFrame!;
         })
-
-  
+        
+        
     }
     
     //MARK:- Resign the Placeholder
-    private func resignPlaceholder() -> Void {
+    func resignPlaceholder() -> Void {
         
         var bottomLineFrame = bottomLineView?.frame
         bottomLineFrame?.origin.y = self.frame.height-1
-
+        
         
         bottomLineView?.backgroundColor = lineColor;
         
         if disableFloatingLabel {
             labelPlaceholder?.isHidden = false
             self.labelPlaceholder?.textColor = self.placeHolderColor;
-
+            
             UIView.animate(withDuration: 0.2, animations: {
                 self.bottomLineView?.frame = bottomLineFrame!
             })
@@ -252,33 +270,17 @@ open class ACFloatingTextfield: UITextField {
             self.labelPlaceholder?.textColor = self.placeHolderColor;
             self.bottomLineView?.frame  =  bottomLineFrame!;
         })
-
+        
     }
     
     //MARK:- UITextField Begin Editing.
-    private func textFieldDidBeginEditing() -> Void {
+    func textFieldDidBeginEditing() -> Void {
         self.floatTheLabel()
         self.layoutSubviews()
     }
     
     //MARK:- UITextField Begin Editing.
-    private func textFieldDidEndEditing() -> Void {
+    func textFieldDidEndEditing() -> Void {
         self.floatTheLabel()
     }
-
-    //MARK:- UITextfield Becomes First Responder
-    override open func becomeFirstResponder() -> Bool {
-        let result = super.becomeFirstResponder()
-        self.textFieldDidBeginEditing()
-        return result
-    }
-    
-    //MARK:- UITextfield Resigns Responder
-    override open func resignFirstResponder() -> Bool {
-        let result =  super.resignFirstResponder()
-        self.textFieldDidEndEditing()
-        return result
-    }
-
-
 }

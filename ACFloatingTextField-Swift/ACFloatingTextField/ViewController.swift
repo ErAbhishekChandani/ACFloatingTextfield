@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  ACFloatingTextField
 //
-//  Created by Macintosh on 31/07/16.
+//  Created by Er Abhishek Chandani on 31/07/16.
 //  Copyright © 2016 Abhishek. All rights reserved.
 //
 
@@ -22,12 +22,6 @@ class ViewController: UIViewController ,UITextFieldDelegate {
         // Do any additional setup after loading the view, typically from a nib.
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-    }
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
          textField.resignFirstResponder()
         return true
@@ -35,7 +29,6 @@ class ViewController: UIViewController ,UITextFieldDelegate {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
 

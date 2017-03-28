@@ -10,24 +10,19 @@
 
 @implementation ACFloatingTextField
 
-
 #pragma mark :- Drawing Methods
 -(void)drawRect:(CGRect)rect {
-    
     [self updateTextField:CGRectMake(CGRectGetMinX(self.frame), CGRectGetMinY(self.frame), CGRectGetWidth(rect), CGRectGetHeight(rect))];
-    
 }
 
 #pragma mark :- Loading From NIB
 -(void)awakeFromNib {
     [super awakeFromNib];
     [self initialization];
-    
 }
 
 #pragma mark :- Initialization Methods
 -(instancetype)init {
-    
     if (self) {
         self = [super init];
         [self initialization];
@@ -36,40 +31,35 @@
 }
 
 -(instancetype)initWithFrame:(CGRect)frame {
-    
     if (self) {
-        
         self = [super initWithFrame:frame];
         [self initialization];
-        
     }
-    
     return self;
 }
 
 #pragma mark :- Drawing Text Rect
 - (CGRect)textRectForBounds:(CGRect)bounds {
-    if(bottomLineView){
-        CGRect bottomFrame = bottomLineView.frame;
-        bottomFrame.size.width = self.frame.size.width;
-        
-        bottomLineView.frame = bottomFrame;
+    if (showingError) {
+        return CGRectMake(0, 0, bounds.size.width, bounds.size.height);
+    }else{
+        return CGRectMake(4, 4, bounds.size.width, bounds.size.height);
     }
-    return CGRectMake(4, 0, bounds.size.width, bounds.size.height);
 }
 
 - (CGRect)editingRectForBounds:(CGRect)bounds {
-    return CGRectMake(4, 0, bounds.size.width, bounds.size.height);
+    if (showingError) {
+        return CGRectMake(0, 0, bounds.size.width, bounds.size.height);
+    }else{
+        return CGRectMake(4, 4, bounds.size.width, bounds.size.height);
+    }
 }
 
 #pragma mark:- Override Set text
 -(void)setText:(NSString *)text {
-    
     [super setText:text];
     if (text) {
-        
         [self floatTheLabel];
-        
     }
     [self checkForDefaulLabel];
 }
@@ -109,8 +99,8 @@
     }
     
     //6. Bottom place Color When show error.
-    if (_errorPlaceHolderColor==nil) {
-        _errorPlaceHolderColor = [UIColor redColor];
+    if (_errorTextColor==nil) {
+        _errorTextColor = [UIColor redColor];
     }
     
     /// Adding Bottom Line View.
@@ -119,6 +109,14 @@
     /// Adding Placeholder Label.
     [self addPlaceholderLabel];
     
+    /// Adding Error Label
+    if (showingError) {
+        if ([self.errorText isEqualToString:@""] && self.errorText == nil) {
+            self.errorText = @"Error";
+        }
+        [self addErrorPlaceholderLabel];
+    }
+
     /// Placeholder Label Configuration.
     if (![self.text isEqualToString:@""]) {
         
@@ -131,14 +129,14 @@
 -(void)addBottomLineView{
     
     [bottomLineView removeFromSuperview];
-    bottomLineView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetHeight(self.frame)-8, CGRectGetWidth(self.frame), 2)];
+
+    bottomLineView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetHeight(self.frame)-1, CGRectGetWidth(self.frame), 2)];
+    bottomLineView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     bottomLineView.backgroundColor = _lineColor;
     bottomLineView.tag = 20;
     [self addSubview:bottomLineView];
-
 }
 -(void)addPlaceholderLabel{
-
     
     [_labelPlaceholder removeFromSuperview];
 
@@ -158,36 +156,38 @@
 
 }
 
+#pragma mark  Adding Error Label in textfield.
 -(void)addErrorPlaceholderLabel{
     
     [self endEditing:YES];
     
     [_labelErrorPlaceholder removeFromSuperview];
     
-    if ([_errorPlaceholder isEqualToString:@""]&&_errorPlaceholder==nil) {
-       _errorPlaceholder = @"Error";
-    }
-    
-    _labelErrorPlaceholder = [[UILabel alloc] initWithFrame:self.frame];
-    _labelErrorPlaceholder.text = _errorPlaceholder;
+
+    _labelErrorPlaceholder = [[UILabel alloc] initWithFrame:self.labelPlaceholder.frame];
+    _labelErrorPlaceholder.text = self.errorText;
     _labelErrorPlaceholder.textAlignment = self.textAlignment;
-    _labelErrorPlaceholder.textColor = _errorPlaceHolderColor;
+    _labelErrorPlaceholder.textColor = _errorTextColor;
+    _labelErrorPlaceholder.tag = 21;
     _labelErrorPlaceholder.font = [UIFont fontWithName:self.font.fontName size:12];
+    
     CGRect frameError = _labelErrorPlaceholder.frame;
     frameError.size.height = 16;
     
     frameError.origin.y = self.bounds.size.height - frameError.size.height;
-    frameError.origin.x = 6;
-    
+    frameError.origin.x = 0;
     _labelErrorPlaceholder.frame = frameError;
     
     [self addSubview:_labelErrorPlaceholder];
+    _labelErrorPlaceholder.hidden = YES;
     
-    [self showErrorPlaceHolder];
 }
+
+#pragma mark  Method to show Error Label.
 -(void)showErrorPlaceHolder{
 
     _disableFloatingErrorLabel = NO;
+    _labelErrorPlaceholder.hidden = NO;
     
     CGRect bottmLineFrame = bottomLineView.frame;
     bottmLineFrame.origin.y = _labelErrorPlaceholder.frame.origin.y-1;
@@ -196,24 +196,23 @@
     
     CGRect labelErrorFrame = _labelErrorPlaceholder.frame;
     labelErrorFrame.origin.y = labelErrorFrame.origin.y + 1;
-    
-    
-    
+  
     [UIView animateWithDuration:0.2 animations:^{
         bottomLineView.frame  =  bottmLineFrame;
         bottomLineView.backgroundColor = _errorLineColor;
         _labelErrorPlaceholder.alpha = 1;
         _labelErrorPlaceholder.frame = labelErrorFrame;
-
+        
     }];
-  
+    
 }
 
+#pragma mark  Method to Hide Error Label.
 -(void)hideErrorPlaceHolder{
+    showingError = NO;
     
     CGRect labelErrorFrame = _labelErrorPlaceholder.frame;
     labelErrorFrame.origin.y = labelErrorFrame.origin.y - 6;
-
     
     [UIView animateWithDuration:0.2 animations:^{
         _labelErrorPlaceholder.alpha = 0;
@@ -237,7 +236,6 @@
                 }
             }
         }
-        
     }else{
         
         for (UIView *view in self.subviews) {
@@ -250,9 +248,7 @@
                 }
             }
         }
-        
     }
-    
 }
 
 #pragma mark  Update and Manage Subviews
@@ -268,7 +264,6 @@
     if (selected) {
         
         _disableFloatingErrorLabel = YES;
-        [self hideErrorPlaceHolder];
         
         bottomLineView.backgroundColor = _selectedLineColor;
         
@@ -368,10 +363,11 @@
 #pragma mark  UITextField Begin Editing.
 
 -(void)textFieldDidBeginEditing {
-    
+    if (showingError) {
+        [self hideErrorPlaceHolder];
+    }
     [self floatTheLabel];
     [self layoutSubviews];
-    
 }
 
 #pragma mark  UITextField End Editing.
@@ -421,16 +417,19 @@
 }
 
 #pragma mark  Set Placeholder Text On Error Labels
--(void)setTextFieldErrorPlaceholderText:(NSString *)errorPlaceholderText {
-    
-    _errorPlaceholder = errorPlaceholderText;
-    
-    self.labelErrorPlaceholder.text = errorPlaceholderText;
-    [self textFieldDidEndEditing];
+-(void)showError {
+    showingError = YES;
+    [self updateTextField:self.frame];
+    [self showErrorPlaceHolder];
 }
--(void)setErrorPlaceholder:(NSString *)errorPlaceholderText {
-    _errorPlaceholder = errorPlaceholderText;
-    [self addErrorPlaceholderLabel];
+-(void)showErrorWithText:(NSString *)errorText {
+    _errorText = errorText;
+    showingError = YES;
+    [self updateTextField:self.frame];
+    [self showErrorPlaceHolder];
+}
+-(void)setErrorText:(NSString *)errorText {
+    _errorText = errorText;
 }
 
 #pragma mark  UITextField Responder Overide

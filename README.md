@@ -1,8 +1,11 @@
 # ACFloatingTextField
 
+![ACFloatingTextfield](https://github.com/ErAbhishekChandani/ACFloatingTextfield/blob/master/ACFloatingField.png "ACFloatingTextfield")
+
 [![Version](https://img.shields.io/cocoapods/v/ACFloatingTextfield-Objc.svg?style=flat)](https://cocoapods.org/pods/ACFloatingTextfield-Objc)
 [![License](https://img.shields.io/cocoapods/l/ACFloatingTextfield-Objc.svg?style=flat)](https://cocoapods.org/pods/ACFloatingTextfield-Objc)
 [![Platform](https://img.shields.io/cocoapods/p/ACFloatingTextfield-Objc.svg?style=flat)](https://cocoapods.org/pods/ACFloatingTextfield-Objc)
+[![Build Status](https://travis-ci.org/ErAbhishekChandani/ACFloatingTextfield.svg?branch=master)](https://travis-ci.org/ErAbhishekChandani/ACFloatingTextfield)
 
 UITextfield class to float the Placeholder and customize the placeholder while editing.
 
@@ -11,12 +14,16 @@ UITextfield class to float the Placeholder and customize the placeholder while e
 - [x] Add Floating effect In UITextfield Placeholder.
 - [x] Change the Placeholder Text Color.
 - [x] Change the Placeholder Text Color when UITextfield begins editing.
-- [x] Add bottom line in 
-.
+- [x] Add bottom line in.
 - [x] Change the bottom line color.
 - [x] Change the bottom line color when UITextfield begins editing.
+- [x] Show error text, change the color of error text & line.
+- [x] Change bottom line color when UITextField show error.
 - [ ] The best is yet to come.
 
+## Preview
+
+![ACFloatingTextfieldGIF](https://github.com/ErAbhishekChandani/ACFloatingTextfield/blob/master/Example/ACFloatingTextifield.gif)
 
 ## Installation
 
@@ -43,6 +50,8 @@ You can install it with the following command:</p>
 <pre><code>platform :ios, '8.0'
 use_frameworks!
 pod “ACFloatingTextfield-Swift” , :git => 'https://github.com/ErAbhishekChandani/ACFloatingTextfield.git'
+
+You can import ACFloatintextField in swift with @import ACFloatingTextfield_Swift .
 </code></pre>
 
 <p>Then, run the following command from Terminal:</p>
@@ -57,11 +66,12 @@ pod “ACFloatingTextfield-Swift” , :git => 'https://github.com/ErAbhishekChan
 
 **Manual Installation**
 
-Download the Sample and drag & drop the ACFloatingTextField.h and ACFloatingTextField.m in your project.
+Download the Sample and drag & drop the ACFloatingTextField.h and ACFloatingTextField.m or if using swift drag ACFloatingTextfield.swift file in your project.
 
 ## What's New
 
-Releasing Swift Version of ACFloating TextField.
+1. ACFloatingTextfield now works with swift 3.x .
+2. Now you can show error validation text at bottom of line, also change the color of error text and line.
 
 ## How To Use.
 
@@ -129,6 +139,36 @@ _textField.selectedPlaceHolderTextColor = [UIColor greenColor];
 ```
 
 **5) Change lineColor, selectedLineColor , placeHolderColor & selectedPlaceHolderColor From Storyboard in Swift version.**
+
+**6) Change the Error Text Color.**
+
+```objective-c
+
+_textField.errorTextColor = [UIColor redColor];
+
+```
+**7) Change the bottom line color when show Error.**
+
+```objective-c
+
+_textField.errorLineColor = [UIColor redColor];
+
+```
+**8) Set Error Message.**
+
+```objective-c
+
+_textField.errorText = @"My Error";
+
+```
+**8) Show Error Message.**
+
+```objective-c
+
+[_textField showError];
+[_textField showErrorWithText:@"This is New Error"];
+
+```
 
 ## Communication
 
