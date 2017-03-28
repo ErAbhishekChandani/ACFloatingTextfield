@@ -111,7 +111,7 @@
     
     /// Adding Error Label
     if (showingError) {
-        if ([self.errorText isEqualToString:@""] && self.errorText == nil) {
+        if ([self.errorText isEqualToString:@""] || self.errorText == nil) {
             self.errorText = @"Error";
         }
         [self addErrorPlaceholderLabel];

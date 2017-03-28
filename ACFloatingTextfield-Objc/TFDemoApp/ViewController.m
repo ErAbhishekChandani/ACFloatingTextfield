@@ -39,7 +39,7 @@
     _textFieldPassword.selectedPlaceHolderColor = [UIColor yellowColor];
     _textFieldPassword.placeHolderColor = [UIColor whiteColor];
     _textFieldPassword.lineColor = [UIColor whiteColor];
-
+    
 }
 
 #pragma mark  UITextfield Delegates

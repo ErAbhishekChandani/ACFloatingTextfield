@@ -13,6 +13,8 @@ import UIKit
 
      fileprivate var bottomLineView : UIView?
      fileprivate var labelPlaceholder : UILabel?
+     fileprivate var labelErrorPlaceholder : UILabel?
+     fileprivate var showingError : Bool = false
     
      @IBInspectable open var disableFloatingLabel : Bool = false
     
@@ -24,11 +26,28 @@ import UIKit
     
      @IBInspectable open var selectedPlaceHolderColor : UIColor = UIColor(red: 19/256.0, green: 141/256.0, blue: 117/256.0, alpha: 1.0)
     
+    @IBInspectable open var errorTextColor : UIColor = UIColor.red
+
+    @IBInspectable open var errorLineColor : UIColor = UIColor.red
+
+    
     //MARK:- Set Text
     override open var text:String?  {
         didSet {
             floatTheLabel()
             checkForDefaulLabel()
+        }
+    }
+    
+    override open var placeholder: String? {
+        willSet {
+            self.labelPlaceholder?.text = newValue
+        }
+    }
+    
+    open var errorText : String? {
+        willSet {
+            self.labelErrorPlaceholder?.text = newValue
         }
     }
     
@@ -62,11 +81,19 @@ import UIKit
 
     // MARK:- Text Rect Management
     override open func textRect(forBounds bounds: CGRect) -> CGRect {
-        return CGRect(x:4, y:4, width:bounds.size.width, height:bounds.size.height);
+        if (showingError) {
+            return CGRect(x:0, y:0, width:bounds.size.width, height:bounds.size.height);
+        }else{
+            return CGRect(x:4, y:4, width:bounds.size.width, height:bounds.size.height);
+        }
     }
 
     override open func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return CGRect(x:4, y:4, width:bounds.size.width, height:bounds.size.height);
+        if (showingError) {
+            return CGRect(x:0, y:0, width:bounds.size.width, height:bounds.size.height);
+        }else{
+            return CGRect(x:4, y:4, width:bounds.size.width, height:bounds.size.height);
+        }
     }
 
     //MARK:- UITextfield Becomes First Responder
@@ -81,6 +108,20 @@ import UIKit
         let result =  super.resignFirstResponder()
         self.textFieldDidEndEditing()
         return result
+    }
+
+    //MARK:- Show Error Label
+    func showError() {
+        showingError = true;
+        self.upadteTextField(frame: self.frame)
+        self.showErrorPlaceHolder();
+    }
+    
+    func showErrorWithText(errorText : String) {
+        self.errorText = errorText;
+        showingError = true;
+        self.upadteTextField(frame: self.frame)
+        self.showErrorPlaceHolder();
     }
 
 
@@ -100,6 +141,14 @@ fileprivate extension ACFloatingTextfield {
         /// Placeholder Label Configuration.
         addFloatingLabel()
         
+        /// Adding Error Label
+        if (showingError) {
+            if (self.errorText == "" || self.errorText == nil) {
+                self.errorText = "Error";
+            }
+            self.addErrorPlaceholderLabel()
+        }
+
         /// Checking Floatibility
         if self.text != nil && self.text != "" {
             self.floatTheLabel()
@@ -146,6 +195,68 @@ fileprivate extension ACFloatingTextfield {
         
     }
     
+    func addErrorPlaceholderLabel() -> Void {
+        
+        self.endEditing(true)
+        labelErrorPlaceholder?.removeFromSuperview()
+        
+        labelErrorPlaceholder = UILabel(frame: CGRect(x:5, y:0, width:self.frame.size.width-5, height:self.frame.height))
+        labelErrorPlaceholder?.text = self.errorText
+        labelErrorPlaceholder?.textAlignment = self.textAlignment
+        labelErrorPlaceholder?.textColor = placeHolderColor
+        labelErrorPlaceholder?.font = UIFont(name: (self.font?.fontName ?? "helvetica")!, size: 12)
+        labelErrorPlaceholder?.tag = 21
+        
+        var frameError = labelErrorPlaceholder?.frame;
+        frameError?.size.height = 12;
+        frameError?.origin.y = self.bounds.size.height - (frameError?.size.height ?? 0)!;
+        frameError?.origin.x = 0;
+        
+        labelErrorPlaceholder?.frame = frameError ?? CGRect.zero;
+        
+        if labelErrorPlaceholder != nil {
+            self.addSubview(labelErrorPlaceholder!)
+        }
+        labelErrorPlaceholder?.isHidden = true;
+
+    }
+    
+    func showErrorPlaceHolder() {
+        
+        labelErrorPlaceholder?.isHidden = false;
+        
+        var bottmLineFrame = bottomLineView?.frame ?? CGRect.zero;
+        bottmLineFrame.origin.y = (labelErrorPlaceholder?.frame.origin.y ?? 0)! - 1;
+        
+        labelErrorPlaceholder?.alpha = 0;
+        labelErrorPlaceholder?.frame = CGRect(x:(labelErrorPlaceholder?.frame.origin.x ?? 0)!, y:(labelErrorPlaceholder?.frame.origin.y ?? 0)!-5, width:labelErrorPlaceholder?.frame.size.width ?? 0, height:labelErrorPlaceholder?.frame.size.height ?? 0);
+        
+        var labelErrorFrame = labelErrorPlaceholder?.frame ?? CGRect.zero;
+        labelErrorFrame.origin.y = labelErrorFrame.origin.y + 6;
+        
+        UIView.animate(withDuration: 0.2) {
+            self.bottomLineView?.frame  =  bottmLineFrame;
+            self.bottomLineView?.backgroundColor = self.errorLineColor;
+            self.labelErrorPlaceholder?.alpha = 1;
+            self.labelErrorPlaceholder?.frame = labelErrorFrame;
+        }
+        
+        
+    }
+    
+    func hideErrorPlaceHolder(){
+        showingError = false;
+        
+        var labelErrorFrame = labelErrorPlaceholder?.frame;
+        labelErrorFrame?.origin.y = (labelErrorFrame?.origin.y ?? 0)! - 6;
+        
+        UIView.animate(withDuration: 0.2) {
+            self.labelErrorPlaceholder?.alpha = 0;
+            self.labelErrorPlaceholder?.frame = labelErrorFrame!;
+        }
+        
+    }
+
     // Checks The Default Placeholder Label
     func checkForDefaulLabel() -> Void {
         
@@ -275,6 +386,9 @@ fileprivate extension ACFloatingTextfield {
     
     //MARK:- UITextField Begin Editing.
     func textFieldDidBeginEditing() -> Void {
+        if showingError {
+            self.hideErrorPlaceHolder()
+        }
         self.floatTheLabel()
         self.layoutSubviews()
     }

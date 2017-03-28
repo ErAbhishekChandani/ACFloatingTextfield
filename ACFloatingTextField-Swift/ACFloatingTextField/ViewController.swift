@@ -19,7 +19,12 @@ class ViewController: UIViewController ,UITextFieldDelegate {
         aTextField.delegate = self
         aTextField.placeholder = "Password"
         self.view.addSubview(aTextField)
+        
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
