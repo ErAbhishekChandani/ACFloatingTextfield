@@ -253,6 +253,7 @@ fileprivate extension ACFloatingTextfield {
         UIView.animate(withDuration: 0.2) {
             self.labelErrorPlaceholder?.alpha = 0;
             self.labelErrorPlaceholder?.frame = labelErrorFrame!;
+            self.bottomLineView?.backgroundColor = self.placeHolderColor;
         }
         
     }
