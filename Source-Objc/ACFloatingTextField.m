@@ -129,6 +129,7 @@
 -(void)addBottomLineView{
     
     [bottomLineView removeFromSuperview];
+
     bottomLineView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetHeight(self.frame)-1, CGRectGetWidth(self.frame), 2)];
     bottomLineView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     bottomLineView.backgroundColor = _lineColor;
@@ -145,7 +146,7 @@
     
     NSString *placeHolderText = _labelPlaceholder.text;
 
-    _labelPlaceholder = [[UILabel alloc]initWithFrame:CGRectMake(5, 0, self.frame.size.width-5, CGRectGetHeight(self.frame))];
+    _labelPlaceholder = [[UILabel alloc]initWithFrame:CGRectMake(5, -2, self.frame.size.width-5, CGRectGetHeight(self.frame))];
     _labelPlaceholder.text = placeHolderText;
     _labelPlaceholder.textAlignment = self.textAlignment;
     _labelPlaceholder.textColor = _placeHolderColor;
@@ -162,6 +163,7 @@
     
     [_labelErrorPlaceholder removeFromSuperview];
     
+
     _labelErrorPlaceholder = [[UILabel alloc] initWithFrame:self.labelPlaceholder.frame];
     _labelErrorPlaceholder.text = self.errorText;
     _labelErrorPlaceholder.textAlignment = self.textAlignment;
@@ -170,10 +172,10 @@
     _labelErrorPlaceholder.font = [UIFont fontWithName:self.font.fontName size:12];
     
     CGRect frameError = _labelErrorPlaceholder.frame;
-    frameError.size.height = 12;
+    frameError.size.height = 16;
+    
     frameError.origin.y = self.bounds.size.height - frameError.size.height;
     frameError.origin.x = 0;
-
     _labelErrorPlaceholder.frame = frameError;
     
     [self addSubview:_labelErrorPlaceholder];
@@ -183,7 +185,7 @@
 
 #pragma mark  Method to show Error Label.
 -(void)showErrorPlaceHolder{
-    
+
     _disableFloatingErrorLabel = NO;
     _labelErrorPlaceholder.hidden = NO;
     
@@ -191,13 +193,10 @@
     bottmLineFrame.origin.y = _labelErrorPlaceholder.frame.origin.y-1;
     
     _labelErrorPlaceholder.alpha = 0;
-    _labelErrorPlaceholder.frame = CGRectMake(_labelErrorPlaceholder.frame.origin.x, _labelErrorPlaceholder.frame.origin.y-5, _labelErrorPlaceholder.frame.size.width, _labelErrorPlaceholder.frame.size.height);
     
     CGRect labelErrorFrame = _labelErrorPlaceholder.frame;
-    labelErrorFrame.origin.y = labelErrorFrame.origin.y + 6;
-    
-    
-    
+    labelErrorFrame.origin.y = labelErrorFrame.origin.y + 1;
+  
     [UIView animateWithDuration:0.2 animations:^{
         bottomLineView.frame  =  bottmLineFrame;
         bottomLineView.backgroundColor = _errorLineColor;
@@ -273,7 +272,7 @@
             _labelPlaceholder.hidden = YES;
             
             CGRect bottmLineFrame = bottomLineView.frame;
-            bottmLineFrame.origin.y = CGRectGetHeight(self.frame)-2;
+            bottmLineFrame.origin.y = CGRectGetHeight(self.frame)-8;
             [UIView animateWithDuration:0.2 animations:^{
                 bottomLineView.frame  =  bottmLineFrame;
             }];
@@ -285,7 +284,7 @@
         CGRect frame = _labelPlaceholder.frame;
         frame.size.height = 12;
         CGRect bottmLineFrame = bottomLineView.frame;
-        bottmLineFrame.origin.y = CGRectGetHeight(self.frame)-2;
+        bottmLineFrame.origin.y = CGRectGetHeight(self.frame)-8;
         [UIView animateWithDuration:0.2 animations:^{
             _labelPlaceholder.frame = frame;
             _labelPlaceholder.font = [UIFont fontWithName:self.font.fontName size:12];
@@ -306,7 +305,7 @@
             
             _labelPlaceholder.hidden = YES;
             CGRect bottmLineFrame = bottomLineView.frame;
-            bottmLineFrame.origin.y = CGRectGetHeight(self.frame)-2;
+            bottmLineFrame.origin.y = CGRectGetHeight(self.frame)-8;
             [UIView animateWithDuration:0.2 animations:^{
                 bottomLineView.frame  =  bottmLineFrame;
             }];
@@ -318,7 +317,7 @@
         CGRect frame = _labelPlaceholder.frame;
         frame.size.height = 12;
         CGRect bottmLineFrame = bottomLineView.frame;
-        bottmLineFrame.origin.y = CGRectGetHeight(self.frame)-1;
+        bottmLineFrame.origin.y = CGRectGetHeight(self.frame)-8;
         [UIView animateWithDuration:0.2 animations:^{
             _labelPlaceholder.frame = frame;
             _labelPlaceholder.font = [UIFont fontWithName:self.font.fontName size:12];
@@ -350,9 +349,9 @@
     }
     
     
-    CGRect frame = CGRectMake(5, 0, self.frame.size.width-5, self.frame.size.height);
+    CGRect frame = CGRectMake(5, -2, self.frame.size.width-5, self.frame.size.height);
     CGRect bottmLineFrame = bottomLineView.frame;
-    bottmLineFrame.origin.y = CGRectGetHeight(self.frame)-1;
+    bottmLineFrame.origin.y = CGRectGetHeight(self.frame)-8;
     [UIView animateWithDuration:0.2 animations:^{
         _labelPlaceholder.frame = frame;
         _labelPlaceholder.font = self.font;
