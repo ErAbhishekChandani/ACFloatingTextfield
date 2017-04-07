@@ -40,7 +40,7 @@ You can install it with the following command:</p>
 
 <p>To integrate ACFloatingTextfield into your Xcode project using <a href="http://cocoapods.org">CocoaPods</a>, simply add the following line to your <code>Podfile</code>:</p>
 
-<div class="highlight highlight-source-ruby"><pre> pod “ACFloatingTextfield-Objc” , :git => 'https://github.com/ErAbhishekChandani/ACFloatingTextfield.git'
+<div class="highlight highlight-source-ruby"><pre> pod 'ACFloatingTextfield-Objc' , :git => 'https://github.com/ErAbhishekChandani/ACFloatingTextfield.git'
  <span class="pl-s"></span></pre></div>
 
 <blockquote>
@@ -49,7 +49,7 @@ You can install it with the following command:</p>
 
 <pre><code>platform :ios, '8.0'
 use_frameworks!
-pod “ACFloatingTextfield-Swift” , :git => 'https://github.com/ErAbhishekChandani/ACFloatingTextfield.git'
+pod 'ACFloatingTextfield-Swift', '~> 1.0.10'
 
 You can import ACFloatintextField in swift with @import ACFloatingTextfield_Swift .
 </code></pre>
