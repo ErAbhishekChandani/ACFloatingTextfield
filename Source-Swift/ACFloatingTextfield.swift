@@ -208,7 +208,7 @@ fileprivate extension ACFloatingTextfield {
         labelErrorPlaceholder?.tag = 21
         
         var frameError = labelErrorPlaceholder?.frame;
-        frameError?.size.height = 12;
+        frameError?.size.height = 15;
         frameError?.origin.y = self.bounds.size.height - (frameError?.size.height ?? 0)!;
         frameError?.origin.x = 0;
         
