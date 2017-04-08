@@ -170,7 +170,7 @@
     _labelErrorPlaceholder.font = [UIFont fontWithName:self.font.fontName size:12];
     
     CGRect frameError = _labelErrorPlaceholder.frame;
-    frameError.size.height = 12;
+    frameError.size.height = 15;
     frameError.origin.y = self.bounds.size.height - frameError.size.height;
     frameError.origin.x = 0;
 
