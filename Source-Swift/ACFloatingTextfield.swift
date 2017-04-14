@@ -203,7 +203,7 @@ fileprivate extension ACFloatingTextfield {
         labelErrorPlaceholder = UILabel(frame: CGRect(x:5, y:0, width:self.frame.size.width-5, height:self.frame.height))
         labelErrorPlaceholder?.text = self.errorText
         labelErrorPlaceholder?.textAlignment = self.textAlignment
-        labelErrorPlaceholder?.textColor = placeHolderColor
+        labelErrorPlaceholder?.textColor = errorTextColor
         labelErrorPlaceholder?.font = UIFont(name: (self.font?.fontName ?? "helvetica")!, size: 12)
         labelErrorPlaceholder?.tag = 21
         
