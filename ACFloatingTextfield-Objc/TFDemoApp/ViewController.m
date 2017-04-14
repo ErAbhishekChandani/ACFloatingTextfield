@@ -18,7 +18,7 @@
 @implementation ViewController
 
 - (IBAction)showErrorTap:(UIButton *)sender {
-    [_textFieldPassword showErrorWithText:@"This is Va Error"];
+    [_textFieldPassword showErrorWithText:@"This is New Error"];
     [_textFieldUsername showErrorWithText:@"Password should not less then 6 characters."];
 }
 
