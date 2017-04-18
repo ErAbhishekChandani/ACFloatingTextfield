@@ -111,13 +111,13 @@ import UIKit
     }
 
     //MARK:- Show Error Label
-    func showError() {
+    func public showError() {
         showingError = true;
         self.upadteTextField(frame: self.frame)
         self.showErrorPlaceHolder();
     }
     
-    func showErrorWithText(errorText : String) {
+    func public showErrorWithText(errorText : String) {
         self.errorText = errorText;
         showingError = true;
         self.upadteTextField(frame: self.frame)
