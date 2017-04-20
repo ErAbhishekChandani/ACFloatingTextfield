@@ -10,17 +10,24 @@ import UIKit
 
 class ViewController: UIViewController ,UITextFieldDelegate {
 
+    let aTextField = ACFloatingTextfield()
+
     @IBOutlet weak var textFieldUsername: ACFloatingTextfield!
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
         
-        let aTextField = ACFloatingTextfield()
         aTextField.frame = CGRect(x:20, y:300, width:UIScreen.main.bounds.width-40, height:45)
         aTextField.delegate = self
         aTextField.placeholder = "Password"
+        aTextField.text = "Abhishk22580"
         self.view.addSubview(aTextField)
-        
-        // Do any additional setup after loading the view, typically from a nib.
+
+    }
+    
+    @IBAction func showError(_ sender: AnyObject) {
+//        textFieldUsername.showError()
+        aTextField.showErrorWithText(errorText: "Enter Valid Text")
     }
     
     override func viewDidAppear(_ animated: Bool) {
