@@ -41,18 +41,21 @@
  * Change the error display text.
  */
 @property (nonatomic,strong) NSString  *errorText;
+/*
+ * Shake line when showing error?.
+ */
+@property (assign) BOOL disableShakeWithError;
+
 
 @property (nonatomic,strong) UILabel *labelPlaceholder;
 @property (nonatomic,strong) UILabel *labelErrorPlaceholder;
 
 
 @property (assign) BOOL disableFloatingLabel;
-@property (assign) BOOL disableFloatingErrorLabel;
 
 -(instancetype)init;
 -(instancetype)initWithFrame:(CGRect)frame;
 
--(void)setTextFieldPlaceholderText:(NSString *)placeholderText;
 -(void)showError;
 -(void)showErrorWithText:(NSString *)errorText;
 -(void)updateTextField:(CGRect)frame;

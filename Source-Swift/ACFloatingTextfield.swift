@@ -186,17 +186,17 @@ fileprivate extension ACFloatingTextfield {
         labelErrorPlaceholder?.removeFromSuperview()
         labelErrorPlaceholder = UILabel()
         labelErrorPlaceholder?.text = self.errorText
-        labelErrorPlaceholder?.sizeToFit()
         labelErrorPlaceholder?.textAlignment = self.textAlignment
         labelErrorPlaceholder?.textColor = errorTextColor
         labelErrorPlaceholder?.font = UIFont(name: (self.font?.fontName ?? "helvetica")!, size: 12)
+        labelErrorPlaceholder?.sizeToFit()
         labelErrorPlaceholder?.isHidden = true;
         if labelErrorPlaceholder != nil {
             self.addSubview(labelErrorPlaceholder!)
         }
 
         var frame = labelErrorPlaceholder!.frame
-        frame.origin.x = self.frame.maxX - frame.width
+        frame.origin.x = self.bounds.maxX - frame.width
         labelErrorPlaceholder?.frame = frame
 
     }

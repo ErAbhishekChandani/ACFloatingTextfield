@@ -18,7 +18,7 @@
 @implementation ViewController
 
 - (IBAction)showErrorTap:(UIButton *)sender {
-    [_textFieldPassword showErrorWithText:@"This is New Error"];
+    [_textFieldPassword showErrorWithText:@""];
     [_textFieldUsername showErrorWithText:@"Password should not less then 6 characters."];
 }
 
@@ -29,7 +29,6 @@
     _textFieldPassword.backgroundColor = [UIColor clearColor];
     _textFieldUsername.textColor = [UIColor whiteColor];
     _textFieldPassword.textColor = [UIColor whiteColor];
-    
     _textFieldUsername.selectedLineColor = [UIColor yellowColor];
     _textFieldUsername.selectedPlaceHolderColor = [UIColor yellowColor];
     _textFieldUsername.placeHolderColor = [UIColor whiteColor];
