@@ -49,7 +49,7 @@ You can install it with the following command:</p>
 
 <pre><code>platform :ios, '8.0'
 use_frameworks!
-pod 'ACFloatingTextfield-Swift', '~> 1.1'
+pod 'ACFloatingTextfield-Swift', '~> 1.2'
 
 You can import ACFloatintextField in swift with @import ACFloatingTextfield_Swift .
 </code></pre>
