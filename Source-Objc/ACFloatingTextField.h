@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+IB_DESIGNABLE
+
 @interface ACFloatingTextField : UITextField
 {
     UIView *bottomLineView;
@@ -16,42 +18,42 @@
 /*
  * Change the Bottom line color. Default is Black Color.
  */
-@property (nonatomic,strong) UIColor *lineColor;
+@property (nonatomic,strong) IBInspectable UIColor *lineColor;
 /*
  * Change the Placeholder text color. Default is Light Gray Color.
  */
-@property (nonatomic,strong) UIColor *placeHolderColor;
+@property (nonatomic,strong) IBInspectable UIColor *placeHolderColor;
 /*
  * Change the Placeholder text color when selected. Default is [UIColor colorWithRed:19/256.0 green:141/256.0 blue:117/256.0 alpha:1.0].
  */
-@property (nonatomic,strong) UIColor *selectedPlaceHolderColor;
+@property (nonatomic,strong) IBInspectable UIColor *selectedPlaceHolderColor;
 /*
  * Change the bottom line color when selected. Default is [UIColor colorWithRed:19/256.0 green:141/256.0 blue:117/256.0 alpha:1.0].
  */
-@property (nonatomic,strong) UIColor *selectedLineColor;
+@property (nonatomic,strong) IBInspectable UIColor *selectedLineColor;
 /*
  * Change the error label text color. Default is Red Color.
  */
-@property (nonatomic,strong) UIColor *errorTextColor;
+@property (nonatomic,strong) IBInspectable UIColor *errorTextColor;
 /*
  * Change the error line color. Default is Red Color.
  */
-@property (nonatomic,strong) UIColor *errorLineColor;
+@property (nonatomic,strong) IBInspectable UIColor *errorLineColor;
 /*
  * Change the error display text.
  */
-@property (nonatomic,strong) NSString  *errorText;
+@property (nonatomic,strong) IBInspectable  NSString  *errorText;
 /*
  * Shake line when showing error?.
  */
-@property (assign) BOOL disableShakeWithError;
+@property (assign) IBInspectable  BOOL disableShakeWithError;
 
 
 @property (nonatomic,strong) UILabel *labelPlaceholder;
 @property (nonatomic,strong) UILabel *labelErrorPlaceholder;
 
 
-@property (assign) BOOL disableFloatingLabel;
+@property (assign) IBInspectable  BOOL disableFloatingLabel;
 
 -(instancetype)init;
 -(instancetype)initWithFrame:(CGRect)frame;

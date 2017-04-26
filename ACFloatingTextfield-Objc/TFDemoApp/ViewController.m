@@ -18,27 +18,13 @@
 @implementation ViewController
 
 - (IBAction)showErrorTap:(UIButton *)sender {
-    [_textFieldPassword showErrorWithText:@""];
-    [_textFieldUsername showErrorWithText:@"Password should not less then 6 characters."];
+    [_textFieldPassword showErrorWithText:@"Password should not less then 6 characters."];
+    [_textFieldUsername showError];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    _textFieldUsername.backgroundColor = [UIColor clearColor];
-    _textFieldPassword.backgroundColor = [UIColor clearColor];
-    _textFieldUsername.textColor = [UIColor whiteColor];
-    _textFieldPassword.textColor = [UIColor whiteColor];
-    _textFieldUsername.selectedLineColor = [UIColor yellowColor];
-    _textFieldUsername.selectedPlaceHolderColor = [UIColor yellowColor];
-    _textFieldUsername.placeHolderColor = [UIColor whiteColor];
-    _textFieldUsername.lineColor = [UIColor whiteColor];
-
-    _textFieldPassword.selectedLineColor = [UIColor yellowColor];
-    _textFieldPassword.selectedPlaceHolderColor = [UIColor yellowColor];
-    _textFieldPassword.placeHolderColor = [UIColor whiteColor];
-    _textFieldPassword.lineColor = [UIColor whiteColor];
-    
+        
 }
 
 #pragma mark  UITextfield Delegates

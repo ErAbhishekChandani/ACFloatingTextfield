@@ -116,6 +116,8 @@
     /// Adding Placeholder Label.
     [self addPlaceholderLabel];
     
+    [self setValue:self.placeHolderColor forKeyPath:@"_placeholderLabel.textColor"];
+
     /// Placeholder Label Configuration.
     if (![self.text isEqualToString:@""]) {
         [self floatTheLabel];
@@ -147,6 +149,7 @@
     _labelPlaceholder.textAlignment = self.textAlignment;
     _labelPlaceholder.textColor = _placeHolderColor;
     _labelPlaceholder.font = self.font;;
+    _labelPlaceholder.hidden = YES;
     [self addSubview:_labelPlaceholder];
 
 }
@@ -299,8 +302,6 @@
     
     
     CGRect frame = CGRectMake(5, 0, self.frame.size.width-5, self.frame.size.height);
-    [UIView animateWithDuration:0.3 animations:^{
-    }];
     
     [UIView animateWithDuration:0.3 animations:^{
         _labelPlaceholder.frame = frame;
