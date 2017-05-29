@@ -21,7 +21,6 @@ class ViewController: UIViewController ,UITextFieldDelegate {
         aTextField.delegate = self
         aTextField.placeholder = "Password"
         aTextField.text = "Abhishk22580"
-        self.view.addSubview(aTextField)
 
     }
     
@@ -45,4 +44,3 @@ class ViewController: UIViewController ,UITextFieldDelegate {
 
 
 }
-

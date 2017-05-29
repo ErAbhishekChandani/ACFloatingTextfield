@@ -15,6 +15,7 @@ import UIKit
      fileprivate var labelPlaceholder : UILabel?
      fileprivate var labelErrorPlaceholder : UILabel?
      fileprivate var showingError : Bool = false
+     fileprivate var leftPadding : CGFloat = 0
 
      /// Disable Floating Label when true.
      @IBInspectable open var disableFloatingLabel : Bool = false
@@ -39,6 +40,46 @@ import UIKit
 
      /// Change Error Line color.
      @IBInspectable open var errorLineColor : UIColor = UIColor.red
+    
+     /// Add Left Accessory With Icon.
+     @IBInspectable open var leftAccessoryIcon : UIImage?{
+        willSet{
+            self.addLeftAccessorryIcon(icon: newValue)
+        }
+     }
+    
+    /// Show Accessory Icon over the bottom line
+    @IBInspectable open var showAccessoryOverBottomLine : Bool = false {
+        willSet{
+            self.setNeedsDisplay()
+        }
+    }
+    
+    /// Padding OffSet
+    @IBInspectable open var leftPaddingOffset : CGFloat = 0 {
+        didSet{
+            if self.leftPaddingOffset > self.frame.height / 2 {
+                self.leftPaddingOffset = self.frame.height/2
+            }
+            self.addLeftAccessorryIcon(icon: self.leftAccessoryIcon)
+        }
+    }
+    
+    //ADD Accessorry
+    func addLeftAccessorryIcon(icon:UIImage?)->Void{
+        
+        if icon == nil {return}
+        leftPadding = self.frame.height
+        let imageView = UIImageView.init(frame: CGRect(x: leftPaddingOffset/2, y: leftPaddingOffset/2, width: leftPadding-leftPaddingOffset, height: leftPadding-leftPaddingOffset))
+        imageView.image = icon
+        imageView.contentMode = .scaleAspectFit
+        let aView = UIView(frame:CGRect(x: 0, y: 0, width: leftPadding, height: leftPadding))
+        aView.backgroundColor = UIColor.clear
+        aView.addSubview(imageView)
+        self.leftView = aView
+        self.leftViewMode = .always
+        self.setNeedsDisplay()
+    }
     
     //MARK:- Set Text
     override open var text:String?  {
@@ -89,11 +130,11 @@ import UIKit
 
     // MARK:- Text Rect Management
     override open func textRect(forBounds bounds: CGRect) -> CGRect {
-        return CGRect(x:4, y:4, width:bounds.size.width, height:bounds.size.height);
+        return CGRect(x:leftPadding+4, y:4, width:bounds.size.width, height:bounds.size.height);
     }
 
     override open func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return CGRect(x:4, y:4, width:bounds.size.width, height:bounds.size.height);
+        return CGRect(x:leftPadding+4, y:4, width:bounds.size.width, height:bounds.size.height);
     }
 
     //MARK:- UITextfield Becomes First Responder
@@ -149,7 +190,7 @@ fileprivate extension ACFloatingTextfield {
         
         bottomLineView?.removeFromSuperview()
         //Bottom Line UIView Configuration.
-        bottomLineView = UIView(frame: CGRect(x:0, y:self.frame.height-1, width:self.frame.width, height:2))
+        bottomLineView = UIView(frame: CGRect(x:showAccessoryOverBottomLine ? 0 : leftPadding, y:self.frame.height-1, width:self.frame.width, height:2))
         bottomLineView?.backgroundColor = lineColor;
         
         if bottomLineView != nil {
@@ -167,7 +208,7 @@ fileprivate extension ACFloatingTextfield {
         if self.placeholder != nil && self.placeholder != "" {
             placeholderText = self.placeholder!
         }
-        labelPlaceholder = UILabel(frame: CGRect(x:5, y:0, width:self.frame.size.width-5, height:self.frame.height))
+        labelPlaceholder = UILabel(frame: CGRect(x:leftPadding+5, y:0, width:self.frame.size.width-5, height:self.frame.height))
         labelPlaceholder?.text = placeholderText
         labelPlaceholder?.textAlignment = self.textAlignment
         labelPlaceholder?.textColor = placeHolderColor
@@ -295,7 +336,6 @@ fileprivate extension ACFloatingTextfield {
             bottomLineFrame?.origin.y = self.frame.height-1
             self.labelPlaceholder?.textColor = self.placeHolderColor
             self.setValue(placeHolderColor, forKeyPath: "_placeholderLabel.textColor")
-
         }
 
         if disableFloatingLabel == true {
@@ -337,7 +377,7 @@ fileprivate extension ACFloatingTextfield {
             return
         }
         
-        let labelFrame = CGRect(x:5, y:0, width:self.frame.size.width-5, height:self.frame.size.height)
+        let labelFrame = CGRect(x:leftPadding + 5, y:0, width:self.frame.size.width-5, height:self.frame.size.height)
         
         UIView.animate(withDuration: 0.3, animations: {
             self.labelPlaceholder?.frame = labelFrame
