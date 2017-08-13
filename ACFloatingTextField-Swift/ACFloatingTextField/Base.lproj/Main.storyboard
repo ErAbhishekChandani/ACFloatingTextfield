@@ -51,11 +51,20 @@
                                         <color key="value" red="0.022216889019999998" green="0.36781119559999997" blue="0.39685496790000002" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="disableFloatingLabel" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="leftAccessoryIcon" value="pointer"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="showAccessoryUnderBottomLine" value="YES"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="leftPaddingOffset">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="leftAccessoryPaddingOffset">
                                         <real key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="rightAccessoryIcon" value="pointer"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="rightAccessoryPaddingOffset">
+                                        <real key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="leftAccessoryIcon" value="pointer"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showLeftAccessoryOverBottomLine" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showRightAccessoryOverBottomLine" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="QhU-Ij-sK7"/>
@@ -69,7 +78,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="0jD-h1-cyU" secondAttribute="bottom" constant="20" id="8JP-89-cL9"/>
                             <constraint firstItem="0jD-h1-cyU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="MyN-eV-EbP"/>

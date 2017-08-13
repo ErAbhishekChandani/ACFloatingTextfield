@@ -10,12 +10,13 @@ import UIKit
 
 @IBDesignable
 @objc open class ACFloatingTextfield: UITextField {
-
+    
      fileprivate var bottomLineView : UIView?
      fileprivate var labelPlaceholder : UILabel?
      fileprivate var labelErrorPlaceholder : UILabel?
      fileprivate var showingError : Bool = false
      fileprivate var leftPadding : CGFloat = 0
+     fileprivate var rightPadding : CGFloat = 0
 
      /// Disable Floating Label when true.
      @IBInspectable open var disableFloatingLabel : Bool = false
@@ -49,36 +50,89 @@ import UIKit
      }
     
     /// Show Accessory Icon over the bottom line
-    @IBInspectable open var showAccessoryOverBottomLine : Bool = false {
+    @IBInspectable open var showLeftAccessoryOverBottomLine : Bool = false {
         willSet{
             self.setNeedsDisplay()
         }
     }
     
-    /// Padding OffSet
-    @IBInspectable open var leftPaddingOffset : CGFloat = 0 {
+    /// Padding OffSet ranging from 0 to half of textfield height e.g If Textfield hieght is 50 then offset value will range from 0 - 25
+    @IBInspectable open var leftAccessoryPaddingOffset : CGFloat = 0 {
         didSet{
-            if self.leftPaddingOffset > self.frame.height / 2 {
-                self.leftPaddingOffset = self.frame.height/2
+            if self.leftAccessoryPaddingOffset > self.frame.height / 2 {
+                self.leftAccessoryPaddingOffset = self.frame.height/2
             }
             self.addLeftAccessorryIcon(icon: self.leftAccessoryIcon)
         }
     }
     
-    //ADD Accessorry
+    /// Left Accessory Icon Alignment
+    @IBInspectable open var leftAccessoryAlignment : UIViewContentMode = .left {
+        willSet{
+            self.addLeftAccessorryIcon(icon: self.leftAccessoryIcon)
+        }
+    }
+    
+    /// Add Right Accessory With Icon.
+    @IBInspectable open var rightAccessoryIcon : UIImage?{
+        willSet{
+            self.addRightAccessorryIcon(icon: newValue)
+        }
+    }
+    
+    /// Show Accessory Icon over the bottom line
+    @IBInspectable open var showRightAccessoryOverBottomLine : Bool = true {
+        willSet{
+            self.setNeedsDisplay()
+        }
+    }
+    
+    /// Padding OffSet ranging from 0 to half of textfield height e.g If Textfield hieght is 50 then offset value will range from 0 - 25
+    @IBInspectable open var rightAccessoryPaddingOffset : CGFloat = 0 {
+        didSet{
+            if self.rightAccessoryPaddingOffset > self.frame.height / 2 {
+                self.rightAccessoryPaddingOffset = self.frame.height/2
+            }
+            self.addRightAccessorryIcon(icon: self.rightAccessoryIcon)
+        }
+    }
+    
+    /// Left Accessory Icon Alignment
+    @IBInspectable open var rightAccessoryAlignment : UIViewContentMode = .right {
+        willSet{
+            self.addRightAccessorryIcon(icon: self.rightAccessoryIcon)
+        }
+    }
+
+    //ADD Left Accessorry
     func addLeftAccessorryIcon(icon:UIImage?)->Void{
         
         if icon == nil {return}
         leftPadding = self.frame.height
-        let imageView = UIImageView.init(frame: CGRect(x: leftPaddingOffset/2, y: leftPaddingOffset/2, width: leftPadding-leftPaddingOffset, height: leftPadding-leftPaddingOffset))
+        let imageView = UIImageView.init(frame: CGRect(x: leftAccessoryPaddingOffset/2, y: leftAccessoryPaddingOffset/2, width: leftPadding-leftAccessoryPaddingOffset, height: leftPadding-leftAccessoryPaddingOffset))
         imageView.image = icon
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = leftAccessoryAlignment
         let aView = UIView(frame:CGRect(x: 0, y: 0, width: leftPadding, height: leftPadding))
         aView.backgroundColor = UIColor.clear
         aView.addSubview(imageView)
         self.leftView = aView
         self.leftViewMode = .always
         self.setNeedsDisplay()
+    }
+    
+    //ADD Right Accessorry
+    func addRightAccessorryIcon(icon:UIImage?)->Void{
+        
+        if icon == nil {return}
+        rightPadding = self.frame.height
+        let imageView = UIImageView.init(frame: CGRect(x: rightAccessoryPaddingOffset/2, y: rightAccessoryPaddingOffset/2, width: rightPadding-rightAccessoryPaddingOffset, height: rightPadding-rightAccessoryPaddingOffset))
+        imageView.image = icon
+        imageView.contentMode = rightAccessoryAlignment
+        let aView = UIView(frame:CGRect(x: 0, y: 0, width: rightPadding, height: rightPadding))
+        aView.addSubview(imageView)
+        self.rightView = aView
+        self.rightViewMode = .always
+        self.setNeedsLayout()
     }
     
     //MARK:- Set Text
@@ -130,11 +184,11 @@ import UIKit
 
     // MARK:- Text Rect Management
     override open func textRect(forBounds bounds: CGRect) -> CGRect {
-        return CGRect(x:leftPadding+4, y:4, width:bounds.size.width, height:bounds.size.height);
+        return CGRect(x:leftPadding+4, y:4, width:bounds.size.width-(leftPadding+rightPadding), height:bounds.size.height);
     }
 
     override open func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return CGRect(x:leftPadding+4, y:4, width:bounds.size.width, height:bounds.size.height);
+        return CGRect(x:leftPadding+4, y:4, width:bounds.size.width-(leftPadding+rightPadding), height:bounds.size.height);
     }
 
     //MARK:- UITextfield Becomes First Responder
@@ -190,7 +244,7 @@ fileprivate extension ACFloatingTextfield {
         
         bottomLineView?.removeFromSuperview()
         //Bottom Line UIView Configuration.
-        bottomLineView = UIView(frame: CGRect(x:showAccessoryOverBottomLine ? 0 : leftPadding, y:self.frame.height-1, width:self.frame.width, height:2))
+        bottomLineView = UIView(frame: CGRect(x:showLeftAccessoryOverBottomLine ? 0 : leftPadding, y:self.frame.height-1, width:showRightAccessoryOverBottomLine ? self.frame.width : self.frame.width-rightPadding, height:2))
         bottomLineView?.backgroundColor = lineColor;
         
         if bottomLineView != nil {

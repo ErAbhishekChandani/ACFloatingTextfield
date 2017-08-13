@@ -50,9 +50,7 @@
 #pragma mark  Override Set text
 -(void)setText:(NSString *)text {
     [super setText:text];
-    if (text) {
-        [self floatTheLabel];
-    }
+    [self floatTheLabel];
     if (showingError) {
         [self hideErrorPlaceHolder];
     }

@@ -1,8 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -19,9 +23,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg4" translatesAutoresizingMaskIntoConstraints="NO" id="xVX-TI-1va">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ov-Bf-yvs">
+                                <rect key="frame" x="70.5" y="40" width="234.5" height="77"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="234.5" id="3w8-lO-NmF"/>
                                     <constraint firstAttribute="height" constant="77" id="oj4-cC-KzW"/>
@@ -45,11 +51,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dr1-6T-rib" customClass="ACFloatingTextField">
+                                <rect key="frame" x="25" y="167" width="325" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="HEv-KF-72h"/>
                                 </constraints>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
@@ -72,13 +79,14 @@
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="string" keyPath="errorText" value="test test tes"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="disableShakeWithError" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="disableFloatingLabel" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="disableFloatingLabel" value="NO"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="EAb-w4-SSB"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fhi-ci-yEN" customClass="ACFloatingTextField">
+                                <rect key="frame" x="25" y="247" width="325" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="Sdf-i8-SuN"/>
                                 </constraints>
@@ -98,6 +106,7 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xwK-gD-Yn2">
+                                <rect key="frame" x="25" y="359" width="325" height="45"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="RbM-4N-KKO"/>
@@ -110,12 +119,21 @@
                                     <action selector="showErrorTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="43a-US-DzQ"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zz2-BE-WAj">
+                                <rect key="frame" x="164" y="427" width="47" height="30"/>
+                                <state key="normal" title="GO TO"/>
+                                <connections>
+                                    <segue destination="vRt-nf-Kvp" kind="show" id="kj1-vH-gUb"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="3ov-Bf-yvs" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="1CO-dd-rNx"/>
                             <constraint firstItem="xwK-gD-Yn2" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="25" id="4sU-GK-thN"/>
                             <constraint firstAttribute="trailing" secondItem="xwK-gD-Yn2" secondAttribute="trailing" constant="25" id="9Qn-ej-Y4B"/>
+                            <constraint firstItem="zz2-BE-WAj" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="9uv-Eb-kva"/>
                             <constraint firstItem="Dr1-6T-rib" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="25" id="EBO-mJ-cY6"/>
+                            <constraint firstItem="zz2-BE-WAj" firstAttribute="top" secondItem="xwK-gD-Yn2" secondAttribute="bottom" constant="23" id="MO2-qf-Cag"/>
                             <constraint firstItem="Dr1-6T-rib" firstAttribute="top" secondItem="3ov-Bf-yvs" secondAttribute="bottom" constant="50" id="Nx4-iL-FFS"/>
                             <constraint firstItem="xwK-gD-Yn2" firstAttribute="top" secondItem="fhi-ci-yEN" secondAttribute="bottom" constant="67" id="UG2-hL-wAg"/>
                             <constraint firstAttribute="trailing" secondItem="xVX-TI-1va" secondAttribute="trailing" id="a6s-IL-ibA"/>
@@ -137,6 +155,42 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="287.19999999999999" y="300.89955022488761"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="7I2-dE-526">
+            <objects>
+                <viewController id="vRt-nf-Kvp" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hfp-Ac-vku"/>
+                        <viewControllerLayoutGuide type="bottom" id="myx-Gf-B98"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="HMe-G8-eHe">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tnv-Ow-OlH">
+                                <rect key="frame" x="76" y="79" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="3Em-ES-ULc"/>
+                                    <constraint firstAttribute="height" constant="30" id="lbV-Ko-Or3"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <segue destination="Fl8-hq-Pim" kind="unwind" unwindAction="back:" id="H4R-i5-iSy"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="tnv-Ow-OlH" firstAttribute="top" secondItem="hfp-Ac-vku" secondAttribute="bottom" constant="59" id="deC-rc-v2e"/>
+                            <constraint firstItem="tnv-Ow-OlH" firstAttribute="leading" secondItem="HMe-G8-eHe" secondAttribute="leadingMargin" constant="60" id="kGy-Xl-Ogj"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qYM-5H-dva" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Fl8-hq-Pim" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1161" y="301"/>
         </scene>
     </scenes>
     <resources>
