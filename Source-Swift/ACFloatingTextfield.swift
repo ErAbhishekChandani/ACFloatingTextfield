@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-@objc open class ACFloatingTextfield: UITextField {
+class ACFloatingTextfield: UITextField {
 
      fileprivate var bottomLineView : UIView?
      fileprivate var labelPlaceholder : UILabel?
@@ -69,7 +69,7 @@ import UIKit
         super.draw(rect)
         self.upadteTextField(frame: CGRect(x:self.frame.minX, y:self.frame.minY, width:rect.width, height:rect.height));
     }
-
+    
     // MARK:- Loading From NIB
     override open func awakeFromNib() {
         super.awakeFromNib()
@@ -116,13 +116,16 @@ import UIKit
         self.showErrorPlaceHolder();
     }
     
+    public func hideError() {
+        showingError = false;
+        self.textFieldDidEndEditing()
+    }
+    
     public func showErrorWithText(errorText : String) {
         self.errorText = errorText;
         showingError = true;
         self.showErrorPlaceHolder();
     }
-
-
 }
 
 fileprivate extension ACFloatingTextfield {
@@ -179,7 +182,6 @@ fileprivate extension ACFloatingTextfield {
         }
         
     }
-    
     
     func addErrorPlaceholderLabel() -> Void {
 
