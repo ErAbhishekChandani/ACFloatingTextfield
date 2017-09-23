@@ -115,7 +115,12 @@ import UIKit
         showingError = true;
         self.showErrorPlaceHolder();
     }
-    
+    public func hideError() {
+        showingError = false;
+        self.hideErrorPlaceHolder();
+        floatTheLabel()
+    }
+
     public func showErrorWithText(errorText : String) {
         self.errorText = errorText;
         showingError = true;
@@ -147,6 +152,13 @@ fileprivate extension ACFloatingTextfield {
     //MARK:- ADD Bottom Line
     func addBottomLine(){
         
+        if bottomLineView?.superview != nil {
+            var bottomLineFrame = bottomLineView?.frame ?? CGRect.zero
+            bottomLineFrame.size.width = self.frame.width
+            bottomLineView?.frame = bottomLineFrame
+            return
+        }
+        
         bottomLineView?.removeFromSuperview()
         //Bottom Line UIView Configuration.
         bottomLineView = UIView(frame: CGRect(x:0, y:self.frame.height-1, width:self.frame.width, height:2))
@@ -161,13 +173,21 @@ fileprivate extension ACFloatingTextfield {
     //MARK:- ADD Floating Label
     func addFloatingLabel(){
         
+        if labelPlaceholder?.superview != nil {
+            var labelFrame = labelPlaceholder?.frame ?? CGRect.zero
+            labelFrame.origin.x = 5
+            labelFrame.size.width = self.frame.width
+            labelPlaceholder?.frame = labelFrame
+            return
+        }
         labelPlaceholder?.removeFromSuperview()
         
         var placeholderText : String? = labelPlaceholder?.text
         if self.placeholder != nil && self.placeholder != "" {
             placeholderText = self.placeholder!
         }
-        labelPlaceholder = UILabel(frame: CGRect(x:5, y:0, width:self.frame.size.width-5, height:self.frame.height))
+        labelPlaceholder = UILabel()
+        labelPlaceholder?.frame = CGRect(x:5, y:0, width:self.frame.size.width-5, height:self.frame.height)
         labelPlaceholder?.text = placeholderText
         labelPlaceholder?.textAlignment = self.textAlignment
         labelPlaceholder?.textColor = placeHolderColor
@@ -210,7 +230,8 @@ fileprivate extension ACFloatingTextfield {
 
             labelErrorPlaceholder?.isHidden = false
             var frame = labelErrorPlaceholder?.frame
-            frame?.origin.y -= (frame?.height ?? 0)!
+            let localFrame = frame;
+            frame?.origin.y -= (localFrame?.height ?? 0)!
             labelErrorPlaceholder?.frame = frame!
             UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
                 self.bottomLineView?.backgroundColor = self.errorLineColor;
@@ -241,7 +262,8 @@ fileprivate extension ACFloatingTextfield {
         }
         
         var labelErrorFrame = labelErrorPlaceholder?.frame;
-        labelErrorFrame?.origin.y -= (labelErrorFrame?.height ?? 0)!
+        let localLabelErrorFrame = labelErrorFrame;
+        labelErrorFrame?.origin.y -= (localLabelErrorFrame?.height ?? 0)!
         
         UIView.animate(withDuration: 0.2, animations: { 
             self.labelErrorPlaceholder?.frame = labelErrorFrame!
@@ -284,6 +306,7 @@ fileprivate extension ACFloatingTextfield {
         
         labelPlaceholder?.isHidden = false
         var bottomLineFrame = bottomLineView?.frame
+        bottomLineFrame?.size.width = self.frame.width
         if selected {
             bottomLineView?.backgroundColor = selectedLineColor
             self.labelPlaceholder?.textColor = self.selectedPlaceHolderColor
@@ -308,8 +331,8 @@ fileprivate extension ACFloatingTextfield {
         }
         
         var labelFrame = labelPlaceholder?.frame
-        labelFrame?.size.height = 12
-        
+        labelFrame?.size.height = 14.33
+
         UIView.animate(withDuration: 0.2, animations: {
             self.labelPlaceholder?.frame = labelFrame!;
             self.labelPlaceholder?.font = UIFont(name: (self.font?.fontName)!, size: 12)
