@@ -128,6 +128,13 @@
 #pragma mark :- Private Methods
 -(void)addBottomLineView{
     
+    if (bottomLineView.superview != nil) {
+        CGRect bottomLineFrame = bottomLineView.frame;
+        bottomLineFrame.size.width = self.frame.size.width;
+        bottomLineView.frame = bottomLineFrame;
+        return;
+    }
+
     [bottomLineView removeFromSuperview];
     bottomLineView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetHeight(self.frame)-1, CGRectGetWidth(self.frame), 2)];
     bottomLineView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -136,11 +143,20 @@
 }
 -(void)addPlaceholderLabel{
     
-    [_labelPlaceholder removeFromSuperview];
-
     if (![self.placeholder isEqualToString:@""]&&self.placeholder!=nil) {
         _labelPlaceholder.text = self.placeholder;
     }
+
+    if (self.labelPlaceholder.superview != nil){
+        CGRect labelFrame = self.labelPlaceholder.frame;
+        labelFrame.origin.x = 5;
+        labelFrame.size.width = self.frame.size.width;
+        self.labelPlaceholder.frame = labelFrame;
+        return;
+    }
+    
+    [_labelPlaceholder removeFromSuperview];
+
     
     NSString *placeHolderText = _labelPlaceholder.text;
 
@@ -371,6 +387,11 @@
 -(void)showError {
     showingError = YES;
     [self showErrorPlaceHolder];
+}
+-(void)hideError {
+    showingError = false;
+    [self hideErrorPlaceHolder];
+    [self floatTheLabel];
 }
 -(void)showErrorWithText:(NSString *)errorText {
     _errorText = errorText;

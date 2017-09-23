@@ -59,6 +59,7 @@ IB_DESIGNABLE
 -(instancetype)initWithFrame:(CGRect)frame;
 
 -(void)showError;
+-(void)hideError;
 -(void)showErrorWithText:(NSString *)errorText;
 -(void)updateTextField:(CGRect)frame;
 
