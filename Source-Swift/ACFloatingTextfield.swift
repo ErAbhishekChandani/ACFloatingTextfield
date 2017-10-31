@@ -67,16 +67,15 @@ import UIKit
     //MARK:- UITtextfield Draw Method Override
     override open func draw(_ rect: CGRect) {
         super.draw(rect)
-        self.upadteTextField(frame: CGRect(x:self.frame.minX, y:self.frame.minY, width:rect.width, height:rect.height));
+        self.updateTextField(frame: CGRect(x:self.frame.minX, y:self.frame.minY, width:rect.width, height:rect.height));
     }
 
-    // MARK:- Loading From NIB
+    // MARK:- Intialization
     override open func awakeFromNib() {
         super.awakeFromNib()
          self.initialize()
     }
     
-    // MARK:- Intialization
     override public init(frame: CGRect) {
         super.init(frame: frame)
         self.initialize()
@@ -86,53 +85,7 @@ import UIKit
         super.init(coder: aDecoder)!
         self.initialize()
     }
-
-    // MARK:- Text Rect Management
-    override open func textRect(forBounds bounds: CGRect) -> CGRect {
-        return CGRect(x:4, y:4, width:bounds.size.width, height:bounds.size.height);
-    }
-
-    override open func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return CGRect(x:4, y:4, width:bounds.size.width, height:bounds.size.height);
-    }
-
-    //MARK:- UITextfield Becomes First Responder
-    override open func becomeFirstResponder() -> Bool {
-        let result = super.becomeFirstResponder()
-        self.textFieldDidBeginEditing()
-        return result
-    }
     
-    //MARK:- UITextfield Resigns Responder
-    override open func resignFirstResponder() -> Bool {
-        let result =  super.resignFirstResponder()
-        self.textFieldDidEndEditing()
-        return result
-    }
-
-    //MARK:- Show Error Label
-    public func showError() {
-        showingError = true;
-        self.showErrorPlaceHolder();
-    }
-    public func hideError() {
-        showingError = false;
-        self.hideErrorPlaceHolder();
-        floatTheLabel()
-    }
-
-    public func showErrorWithText(errorText : String) {
-        self.errorText = errorText;
-        showingError = true;
-        self.showErrorPlaceHolder();
-    }
-
-
-}
-
-fileprivate extension ACFloatingTextfield {
-    
-    //MARK:- ACFLoating Initialzation.
     func initialize() -> Void {
         
         self.clipsToBounds = true
@@ -200,9 +153,89 @@ fileprivate extension ACFloatingTextfield {
         
     }
     
+    //MARK: - Config
+    func updateConfig() {
+        bottomLineView?.backgroundColor = lineColor                                     //Line color
+        self.setValue(self.placeHolderColor, forKeyPath: "_placeholderLabel.textColor") //Placeholder Color
+        
+    }
+
+    // MARK:- Text Rect Management
+    override open func textRect(forBounds bounds: CGRect) -> CGRect {
+        return CGRect(x:4, y:4, width:bounds.size.width, height:bounds.size.height);
+    }
+
+    override open func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return CGRect(x:4, y:4, width:bounds.size.width, height:bounds.size.height);
+    }
+
+    //MARK:- UITextfield Becomes First Responder
+    override open func becomeFirstResponder() -> Bool {
+        let result = super.becomeFirstResponder()
+        self.textFieldDidBeginEditing()
+        return result
+    }
+    
+    //MARK:- UITextfield Resigns Responder
+    override open func resignFirstResponder() -> Bool {
+        let result =  super.resignFirstResponder()
+        self.textFieldDidEndEditing()
+        return result
+    }
+
+    //MARK:- Show & Hide Error PlaceHolder
+    public func showError() {
+        showingError = true;
+        self.showErrorPlaceHolder();
+    }
+    
+    public func hideError() {
+        showingError = false;
+        self.hideErrorPlaceHolder();
+        floatTheLabel()
+    }
+
+    public func showErrorWithText(errorText : String) {
+        self.errorText = errorText;
+        showingError = true;
+        self.showErrorPlaceHolder();
+    }
+
+    func showErrorPlaceHolder() {
+        
+        var bottomLineFrame = bottomLineView?.frame
+        bottomLineFrame?.origin.y = self.frame.height-2
+        if self.errorText != nil && self.errorText != "" {
+            self.addErrorPlaceholderLabel()
+            
+            labelErrorPlaceholder?.isHidden = false
+            var frame = labelErrorPlaceholder?.frame
+            let localFrame = frame;
+            frame?.origin.y -= (localFrame?.height ?? 0)!
+            labelErrorPlaceholder?.frame = frame!
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+                self.bottomLineView?.backgroundColor = self.errorLineColor;
+                frame?.origin.y = 0
+                self.labelErrorPlaceholder?.frame = frame!
+                self.bottomLineView?.frame  =  bottomLineFrame!;
+                
+            }, completion: nil)
+        }else{
+            
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+                self.bottomLineView?.backgroundColor = self.errorLineColor;
+                self.bottomLineView?.frame  =  bottomLineFrame!;
+            }, completion: nil)
+        }
+        
+        if shakeLineWithError {
+            bottomLineView?.shake()
+        }
+        
+    }
     
     func addErrorPlaceholderLabel() -> Void {
-
+        
         labelErrorPlaceholder?.removeFromSuperview()
         labelErrorPlaceholder = UILabel()
         labelErrorPlaceholder?.text = self.errorText
@@ -214,47 +247,14 @@ fileprivate extension ACFloatingTextfield {
         if labelErrorPlaceholder != nil {
             self.addSubview(labelErrorPlaceholder!)
         }
-
+        
         var frame = labelErrorPlaceholder!.frame
         frame.origin.x = self.bounds.maxX - frame.width
         labelErrorPlaceholder?.frame = frame
-
-    }
-    
-    func showErrorPlaceHolder() {
-        
-        var bottomLineFrame = bottomLineView?.frame
-        bottomLineFrame?.origin.y = self.frame.height-2
-        if self.errorText != nil && self.errorText != "" {
-            self.addErrorPlaceholderLabel()
-
-            labelErrorPlaceholder?.isHidden = false
-            var frame = labelErrorPlaceholder?.frame
-            let localFrame = frame;
-            frame?.origin.y -= (localFrame?.height ?? 0)!
-            labelErrorPlaceholder?.frame = frame!
-            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
-                self.bottomLineView?.backgroundColor = self.errorLineColor;
-                frame?.origin.y = 0
-                self.labelErrorPlaceholder?.frame = frame!
-                self.bottomLineView?.frame  =  bottomLineFrame!;
-
-                }, completion: nil)
-        }else{
-
-            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
-                self.bottomLineView?.backgroundColor = self.errorLineColor;
-                self.bottomLineView?.frame  =  bottomLineFrame!;
-                }, completion: nil)
-        }
-        
-        if shakeLineWithError {
-            bottomLineView?.shake()
-        }
         
     }
     
-    func hideErrorPlaceHolder(){
+    func hideErrorPlaceHolder() {
         showingError = false;
         
         if errorText == nil || errorText == "" {
@@ -265,13 +265,17 @@ fileprivate extension ACFloatingTextfield {
         let localLabelErrorFrame = labelErrorFrame;
         labelErrorFrame?.origin.y -= (localLabelErrorFrame?.height ?? 0)!
         
-        UIView.animate(withDuration: 0.2, animations: { 
+        UIView.animate(withDuration: 0.2, animations: {
             self.labelErrorPlaceholder?.frame = labelErrorFrame!
-            }) { (finished) in
-                self.labelErrorPlaceholder?.removeFromSuperview()
+        }) { (finished) in
+            self.labelErrorPlaceholder?.removeFromSuperview()
         }
         
     }
+
+}
+
+fileprivate extension ACFloatingTextfield {
 
     //MARK:- Float & Resign
     func floatTheLabel() -> Void {
@@ -296,7 +300,7 @@ fileprivate extension ACFloatingTextfield {
     }
     
     //MARK:- Upadate and Manage Subviews
-    func upadteTextField(frame:CGRect) -> Void {
+    func updateTextField(frame:CGRect) -> Void {
         self.frame = frame;
         self.initialize()
     }

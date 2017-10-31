@@ -10,13 +10,23 @@ import UIKit
 
 class ViewController: UIViewController ,UITextFieldDelegate {
 
+    @IBOutlet weak var test1TextField: ACFloatingTextfield!
+    
     let aTextField = ACFloatingTextfield()
 
    // @IBOutlet weak var textFieldUsername: ACFloatingTextfield!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-//
+
+        //Storyboard
+        test1TextField.lineColor = UIColor.yellow
+        test1TextField.selectedLineColor = UIColor.orange
+        test1TextField.placeHolderColor = UIColor.darkGray
+        test1TextField.selectedPlaceHolderColor = UIColor.lightGray
+        test1TextField.updateConfig()
+        
+        //Custom
         aTextField.frame = CGRect(x:20, y:300, width:UIScreen.main.bounds.width-40, height:45)
         aTextField.delegate = self
         aTextField.placeholder = "Pasggsword"
@@ -24,6 +34,9 @@ class ViewController: UIViewController ,UITextFieldDelegate {
         self.view.addSubview(aTextField)
 
     }
+    
+    
+    
     @IBAction func hideError(_ sender: Any) {
         aTextField.hideError()
     }
