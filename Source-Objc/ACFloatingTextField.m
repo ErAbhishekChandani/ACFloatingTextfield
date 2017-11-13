@@ -5,9 +5,19 @@
 //  Created by Abhishek Chandani on 19/05/16.
 //  Copyright © 2016 Abhishek. All rights reserved.
 //
+#define kPlaceholderFontSize 12
+#define kPlaceholderHeight 15
 
 #import "ACFloatingTextField.h"
+@interface ACFloatingTextField ()
+{
+    
+    NSLayoutConstraint *bottomLineViewHeight;
+    NSLayoutConstraint *placeholderLabelHeight;
+    NSLayoutConstraint *errorLabelHieght;
 
+}
+@end
 @implementation ACFloatingTextField
 
 #pragma mark :- Drawing Methods
@@ -73,6 +83,25 @@
     self.labelErrorPlaceholder.text = errorText;
 }
 
+-(void)setLineColor:(UIColor *)lineColor {
+    _lineColor = lineColor;
+    [self floatTheLabel];
+}
+
+-(void)setPlaceHolderColor:(UIColor *)placeHolderColor {
+    _placeHolderColor = placeHolderColor;
+    [self floatTheLabel];
+}
+
+-(void)setSelectedLineColor:(UIColor *)selectedLineColor {
+    _selectedLineColor = selectedLineColor;
+    [self floatTheLabel];
+}
+
+-(void)setSelectedPlaceHolderColor:(UIColor *)selectedPlaceHolderColor {
+    _selectedPlaceHolderColor = selectedPlaceHolderColor;
+    [self floatTheLabel];
+}
 
 -(void)initialization{
     
@@ -129,95 +158,110 @@
 -(void)addBottomLineView{
     
     if (bottomLineView.superview != nil) {
-        CGRect bottomLineFrame = bottomLineView.frame;
-        bottomLineFrame.size.width = self.frame.size.width;
-        bottomLineView.frame = bottomLineFrame;
         return;
     }
-
-    [bottomLineView removeFromSuperview];
-    bottomLineView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetHeight(self.frame)-1, CGRectGetWidth(self.frame), 2)];
-    bottomLineView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    bottomLineView.backgroundColor = _lineColor;
+    bottomLineView = [UIView new];
+    bottomLineView.backgroundColor = showingError ? self.errorLineColor : self.lineColor;
+    bottomLineView.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:bottomLineView];
+    
+    NSLayoutConstraint *leadingConstraint = [NSLayoutConstraint constraintWithItem:bottomLineView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0];
+    
+    NSLayoutConstraint *trailingConstraint = [NSLayoutConstraint constraintWithItem:bottomLineView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0];
+    
+    NSLayoutConstraint * bottomConstraint = [NSLayoutConstraint constraintWithItem:bottomLineView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-1];
+    
+    bottomLineViewHeight = [NSLayoutConstraint constraintWithItem:bottomLineView
+                                                          attribute:NSLayoutAttributeHeight
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:nil
+                                                          attribute: NSLayoutAttributeNotAnAttribute
+                                                         multiplier:1
+                                                           constant:1];
+
+    [self addConstraints:@[leadingConstraint,trailingConstraint,bottomConstraint]];
+    [self addConstraint:bottomLineViewHeight];
 }
 -(void)addPlaceholderLabel{
-    
-    if (![self.placeholder isEqualToString:@""]&&self.placeholder!=nil) {
-        _labelPlaceholder.text = self.placeholder;
-    }
 
     if (self.labelPlaceholder.superview != nil){
-        CGRect labelFrame = self.labelPlaceholder.frame;
-        labelFrame.origin.x = 5;
-        labelFrame.size.width = self.frame.size.width;
-        self.labelPlaceholder.frame = labelFrame;
         return;
     }
-    
-    [_labelPlaceholder removeFromSuperview];
 
-    
-    NSString *placeHolderText = _labelPlaceholder.text;
-
-    _labelPlaceholder = [[UILabel alloc]initWithFrame:CGRectMake(5, 0, self.frame.size.width-5, CGRectGetHeight(self.frame))];
-    _labelPlaceholder.text = placeHolderText;
+    _labelPlaceholder = [UILabel new];
+    _labelPlaceholder.text = self.placeholder;
     _labelPlaceholder.textAlignment = self.textAlignment;
     _labelPlaceholder.textColor = _placeHolderColor;
-    _labelPlaceholder.font = self.font;;
+    _labelPlaceholder.font = [UIFont fontWithName:self.font.fontName size:kPlaceholderFontSize];
     _labelPlaceholder.hidden = YES;
-    [self addSubview:_labelPlaceholder];
+    [_labelPlaceholder sizeToFit];
+    _labelPlaceholder.translatesAutoresizingMaskIntoConstraints = NO;
 
+    [self addSubview:_labelPlaceholder];
+    
+    NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:_labelPlaceholder attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1.0 constant:0];
+    NSLayoutConstraint *trailingConstraint = [NSLayoutConstraint constraintWithItem:_labelPlaceholder attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0];
+    NSLayoutConstraint *leadingConstraint = [NSLayoutConstraint constraintWithItem:_labelPlaceholder attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeading multiplier:1.0 constant:5];
+    placeholderLabelHeight = [NSLayoutConstraint constraintWithItem:_labelPlaceholder
+                                                      attribute:NSLayoutAttributeHeight
+                                                      relatedBy:NSLayoutRelationEqual
+                                                         toItem:nil
+                                                      attribute: NSLayoutAttributeNotAnAttribute
+                                                     multiplier:1
+                                                       constant:kPlaceholderHeight];
+
+    [self addConstraints:@[topConstraint,trailingConstraint,leadingConstraint]];
+    [_labelPlaceholder addConstraint:placeholderLabelHeight];
 }
 
 #pragma mark  Adding Error Label in textfield.
 -(void)addErrorPlaceholderLabel{
     
-    [self.labelErrorPlaceholder removeFromSuperview];
-    
+    if (self.labelErrorPlaceholder.superview != nil){
+        return;
+    }
+
     self.labelErrorPlaceholder = [[UILabel alloc] init];
     self.labelErrorPlaceholder.text = self.errorText;
     self.labelErrorPlaceholder.textAlignment = self.textAlignment;
     self.labelErrorPlaceholder.textColor = self.errorTextColor;
-    self.labelErrorPlaceholder.font = [UIFont fontWithName:self.font.fontName size:12];
+    self.labelErrorPlaceholder.font = [UIFont fontWithName:self.font.fontName size:kPlaceholderFontSize];
     [self.labelErrorPlaceholder sizeToFit];
-    self.labelErrorPlaceholder.hidden = YES;
+    self.labelErrorPlaceholder.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:self.labelErrorPlaceholder];
 
-    CGRect frameError = self.labelErrorPlaceholder.frame;
-    frameError.origin.x = CGRectGetMaxX(self.bounds) - CGRectGetWidth(self.labelErrorPlaceholder.frame);
-    self.labelErrorPlaceholder.frame = frameError;
-    
+    NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:self.labelErrorPlaceholder attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1.0 constant:0];
+    NSLayoutConstraint *trailingConstraint = [NSLayoutConstraint constraintWithItem:self.labelErrorPlaceholder attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0];
+    errorLabelHieght = [NSLayoutConstraint constraintWithItem:self.labelErrorPlaceholder
+                                                          attribute:NSLayoutAttributeHeight
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:nil
+                                                          attribute: NSLayoutAttributeNotAnAttribute
+                                                         multiplier:1
+                                                           constant:0];
+
+    [self addConstraints:@[topConstraint,trailingConstraint]];
+    [self.labelErrorPlaceholder addConstraint:errorLabelHieght];
+
 }
 
 #pragma mark  Method to show Error Label.
 -(void)showErrorPlaceHolder{
     
-    CGRect bottmLineFrame = bottomLineView.frame;
-    bottmLineFrame.origin.y = self.frame.size.height-2;
-    
+    bottomLineViewHeight.constant = 2;
     if (self.errorText != nil && ![self.errorText isEqualToString:@""]) {
-        
         [self addErrorPlaceholderLabel];
-        self.labelErrorPlaceholder.hidden = NO;
-        
-        CGRect frame = self.labelErrorPlaceholder.frame;
-        frame.origin.y -= (frame.size.height);
-        self.labelErrorPlaceholder.frame = frame;
-
+        errorLabelHieght.constant = kPlaceholderHeight;
         [UIView animateWithDuration:0.2 animations:^{
-            bottomLineView.frame  =  bottmLineFrame;
             bottomLineView.backgroundColor = _errorLineColor;
-            CGRect labelFrame = self.labelErrorPlaceholder.frame;
-            labelFrame.origin.y = 0;
-            self.labelErrorPlaceholder.frame = labelFrame;
+            [self layoutIfNeeded];
         }];
 
     }else{
-    
+        errorLabelHieght.constant = 0;
         [UIView animateWithDuration:0.2 animations:^{
-            bottomLineView.frame  =  bottmLineFrame;
             bottomLineView.backgroundColor = _errorLineColor;
+            [self layoutIfNeeded];
         }];
 
     }
@@ -234,14 +278,10 @@
         return;
     }
     
-    CGRect labelErrorFrame = _labelErrorPlaceholder.frame;
-    labelErrorFrame.origin.y -= (labelErrorFrame.size.height);
-    
+    errorLabelHieght.constant = 0;
     [UIView animateWithDuration:0.2 animations:^{
-        self.
-        labelErrorPlaceholder.frame = labelErrorFrame;
+        [self layoutIfNeeded];
     } completion:^(BOOL finished) {
-        [self.labelErrorPlaceholder removeFromSuperview];
     }];
 }
 
@@ -256,42 +296,42 @@
 -(void)floatPlaceHolder:(BOOL)selected {
     
     self.labelPlaceholder.hidden = NO;
-    CGRect bottmLineFrame = bottomLineView.frame;
 
     if (selected) {
-        bottomLineView.backgroundColor = self.selectedLineColor;
+        bottomLineView.backgroundColor = showingError ? self.errorLineColor : self.selectedLineColor;
         self.labelPlaceholder.textColor = self.selectedPlaceHolderColor;
-        bottmLineFrame.origin.y = CGRectGetHeight(self.frame)-2;
+        bottomLineViewHeight.constant = 2;
         [self setValue:self.selectedPlaceHolderColor forKeyPath:@"_placeholderLabel.textColor"];
 
     }
     else{
         
-        bottomLineView.backgroundColor = self.lineColor;
+        bottomLineView.backgroundColor = showingError ? self.errorLineColor : self.lineColor;
         self.labelPlaceholder.textColor = self.placeHolderColor;
-        bottmLineFrame.origin.y = CGRectGetHeight(self.frame)-1;
+        bottomLineViewHeight.constant = 1;
         [self setValue:self.placeHolderColor forKeyPath:@"_placeholderLabel.textColor"];
     }
     
     if (self.disableFloatingLabel){
         
         _labelPlaceholder.hidden = YES;
-        [UIView animateWithDuration:0.2 animations:^{
-            bottomLineView.frame  =  bottmLineFrame;
-        }];
+//        [UIView animateWithDuration:0.2 animations:^{
+//            [self layoutIfNeeded];
+//        }];
         
         return;
     }
-
     
-    CGRect frame = self.labelPlaceholder.frame;
-    frame.size.height = 12;
-
+    // If already floated
+    if (placeholderLabelHeight.constant == kPlaceholderHeight) {
+        return;
+    }
+    
+    
+    placeholderLabelHeight.constant = kPlaceholderHeight;
+    _labelPlaceholder.font = [UIFont fontWithName:self.font.fontName size:kPlaceholderFontSize];
     [UIView animateWithDuration:0.2 animations:^{
-        _labelPlaceholder.frame = frame;
-        _labelPlaceholder.font = [UIFont fontWithName:self.font.fontName size:12];
-        bottomLineView.frame  =  bottmLineFrame;
-        
+        [self layoutIfNeeded];
     }];
     
 }
@@ -299,31 +339,28 @@
 
     [self setValue:self.placeHolderColor forKeyPath:@"_placeholderLabel.textColor"];
 
-    bottomLineView.backgroundColor = self.lineColor;
-    
-    CGRect bottmLineFrame = bottomLineView.frame;
-    bottmLineFrame.origin.y = CGRectGetHeight(self.frame)-1;
+    bottomLineView.backgroundColor = showingError ? self.errorLineColor : self.lineColor;
+    bottomLineViewHeight.constant = 1;
 
     if (self.disableFloatingLabel){
         
         self.labelPlaceholder.hidden = YES;
         self.labelPlaceholder.textColor = self.placeHolderColor;
         [UIView animateWithDuration:0.2 animations:^{
-            bottomLineView.frame  =  bottmLineFrame;
+            [self layoutIfNeeded];
         }];
         
         return;
-        
     }
     
     
-    CGRect frame = CGRectMake(5, 0, self.frame.size.width-5, self.frame.size.height);
+    CGFloat height = CGRectGetHeight(self.frame);
+    placeholderLabelHeight.constant = height;
     
     [UIView animateWithDuration:0.3 animations:^{
-        _labelPlaceholder.frame = frame;
         _labelPlaceholder.font = self.font;
         _labelPlaceholder.textColor = _placeHolderColor;
-        bottomLineView.frame  =  bottmLineFrame;
+        [self layoutIfNeeded];
     } completion:^(BOOL finished) {
         self.labelPlaceholder.hidden = YES;
         self.placeholder = self.labelPlaceholder.text;
@@ -355,23 +392,25 @@
 
 -(void)floatTheLabel{
     
-    if ([self.text isEqualToString:@""] && self.isFirstResponder) {
-        
-        [self floatPlaceHolder:YES];
-        
-    }else if ([self.text isEqualToString:@""] && !self.isFirstResponder) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if ([self.text isEqualToString:@""] && self.isFirstResponder) {
+            
+            [self floatPlaceHolder:YES];
+            
+        }else if ([self.text isEqualToString:@""] && !self.isFirstResponder) {
+            
+            [self resignPlaceholder];
+            
+        }else if (![self.text isEqualToString:@""] && !self.isFirstResponder) {
+            
+            [self floatPlaceHolder:NO];
+            
+        }else if (![self.text isEqualToString:@""] && self.isFirstResponder) {
+            
+            [self floatPlaceHolder:YES];
+        }
+    });
     
-        [self resignPlaceholder];
-        
-    }else if (![self.text isEqualToString:@""] && !self.isFirstResponder) {
-        
-        [self floatPlaceHolder:NO];
-        
-    }else if (![self.text isEqualToString:@""] && self.isFirstResponder) {
-        
-        [self floatPlaceHolder:YES];
-    }
-
 }
 #pragma mark  Shake Animation
 -(void)shakeView:(UIView*)view{

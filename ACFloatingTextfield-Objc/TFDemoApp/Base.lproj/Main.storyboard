@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -144,6 +144,104 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="287.19999999999999" y="300.89955022488761"/>
+        </scene>
+        <!--Test View Controller-->
+        <scene sceneID="9SY-QS-VKr">
+            <objects>
+                <viewController id="4xz-cb-2IU" customClass="TestViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5gO-LM-2DI"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ys0-a1-bQP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FGF-F7-XWZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CbK-nN-Cdp" customClass="ACFloatingTextField">
+                                <rect key="frame" x="20" y="100" width="335" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="34Z-XP-s9N"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="4xz-cb-2IU" id="Np8-np-8ws"/>
+                                </connections>
+                            </textField>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="9hE-B7-iPN">
+                                <rect key="frame" x="20" y="199" width="335" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oiO-Lo-Nwc">
+                                        <rect key="frame" x="0.0" y="0.0" width="157.5" height="30"/>
+                                        <color key="backgroundColor" red="0.32340019939999998" green="0.64288336040000005" blue="0.80577987429999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Show Error">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="showError:" destination="4xz-cb-2IU" eventType="touchUpInside" id="HT1-FU-QsG"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UuA-6o-oJz">
+                                        <rect key="frame" x="177.5" y="0.0" width="157.5" height="30"/>
+                                        <color key="backgroundColor" red="0.32340019939999998" green="0.64288336040000005" blue="0.80577987429999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Hide Error">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="hideError:" destination="4xz-cb-2IU" eventType="touchUpInside" id="v12-ok-cv4"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="8Kx-NV-Iuu">
+                                <rect key="frame" x="20" y="249" width="335" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ilh-Dv-kuR">
+                                        <rect key="frame" x="0.0" y="0.0" width="157.5" height="30"/>
+                                        <color key="backgroundColor" red="0.32340019939999998" green="0.64288336040000005" blue="0.80577987429999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Change Line Color">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="changeLineColor:" destination="4xz-cb-2IU" eventType="touchUpInside" id="cGg-m0-JGc"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ZD-XV-cEv">
+                                        <rect key="frame" x="177.5" y="0.0" width="157.5" height="30"/>
+                                        <color key="backgroundColor" red="0.32340019939999998" green="0.64288336040000005" blue="0.80577987429999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <state key="normal" title="Change Placeholder Color">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="changePlaceHolderColor:" destination="4xz-cb-2IU" eventType="touchUpInside" id="i5b-99-lrI"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="8Kx-NV-Iuu" firstAttribute="leading" secondItem="9hE-B7-iPN" secondAttribute="leading" id="C6f-R7-xNr"/>
+                            <constraint firstItem="9hE-B7-iPN" firstAttribute="leading" secondItem="FGF-F7-XWZ" secondAttribute="leading" constant="20" id="O8H-EG-Jgh"/>
+                            <constraint firstItem="CbK-nN-Cdp" firstAttribute="leading" secondItem="FGF-F7-XWZ" secondAttribute="leading" constant="20" id="QNZ-mc-wUR"/>
+                            <constraint firstItem="8Kx-NV-Iuu" firstAttribute="top" secondItem="9hE-B7-iPN" secondAttribute="top" constant="50" id="SV5-rl-2U6"/>
+                            <constraint firstItem="8Kx-NV-Iuu" firstAttribute="trailing" secondItem="9hE-B7-iPN" secondAttribute="trailing" id="TIb-8o-JIf"/>
+                            <constraint firstAttribute="trailing" secondItem="9hE-B7-iPN" secondAttribute="trailing" constant="20" id="WT4-bc-xCN"/>
+                            <constraint firstItem="CbK-nN-Cdp" firstAttribute="top" secondItem="FGF-F7-XWZ" secondAttribute="top" constant="100" id="e1f-Af-a5V"/>
+                            <constraint firstAttribute="trailing" secondItem="CbK-nN-Cdp" secondAttribute="trailing" constant="20" id="hmV-Pc-ayf"/>
+                            <constraint firstItem="9hE-B7-iPN" firstAttribute="top" secondItem="CbK-nN-Cdp" secondAttribute="bottom" constant="49" id="o9d-ld-en1"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="textFieldUserName" destination="CbK-nN-Cdp" id="6yD-cK-tx2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0iv-W4-Xek" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1061.5999999999999" y="293.70314842578711"/>
         </scene>
     </scenes>
     <resources>
