@@ -192,7 +192,7 @@
     _labelPlaceholder.text = self.placeholder;
     _labelPlaceholder.textAlignment = self.textAlignment;
     _labelPlaceholder.textColor = _placeHolderColor;
-    _labelPlaceholder.font = [UIFont fontWithName:self.font.fontName size:12];
+    _labelPlaceholder.font = [UIFont fontWithName:self.font.fontName size:kPlaceholderFontSize];
     _labelPlaceholder.hidden = YES;
     [_labelPlaceholder sizeToFit];
     _labelPlaceholder.translatesAutoresizingMaskIntoConstraints = NO;
@@ -208,7 +208,7 @@
                                                          toItem:nil
                                                       attribute: NSLayoutAttributeNotAnAttribute
                                                      multiplier:1
-                                                       constant:15];
+                                                       constant:kPlaceholderHeight];
 
     [self addConstraints:@[topConstraint,trailingConstraint,leadingConstraint]];
     [_labelPlaceholder addConstraint:placeholderLabelHeight];
@@ -225,7 +225,7 @@
     self.labelErrorPlaceholder.text = self.errorText;
     self.labelErrorPlaceholder.textAlignment = self.textAlignment;
     self.labelErrorPlaceholder.textColor = self.errorTextColor;
-    self.labelErrorPlaceholder.font = [UIFont fontWithName:self.font.fontName size:12];
+    self.labelErrorPlaceholder.font = [UIFont fontWithName:self.font.fontName size:kPlaceholderFontSize];
     [self.labelErrorPlaceholder sizeToFit];
     self.labelErrorPlaceholder.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:self.labelErrorPlaceholder];
@@ -251,7 +251,7 @@
     bottomLineViewHeight.constant = 2;
     if (self.errorText != nil && ![self.errorText isEqualToString:@""]) {
         [self addErrorPlaceholderLabel];
-        errorLabelHieght.constant = 15;
+        errorLabelHieght.constant = kPlaceholderHeight;
         [UIView animateWithDuration:0.2 animations:^{
             bottomLineView.backgroundColor = _errorLineColor;
             [self layoutIfNeeded];
@@ -315,21 +315,21 @@
     if (self.disableFloatingLabel){
         
         _labelPlaceholder.hidden = YES;
-        [UIView animateWithDuration:0.2 animations:^{
-            [self layoutIfNeeded];
-        }];
+//        [UIView animateWithDuration:0.2 animations:^{
+//            [self layoutIfNeeded];
+//        }];
         
         return;
     }
     
     // If already floated
-    if (placeholderLabelHeight.constant == 15) {
+    if (placeholderLabelHeight.constant == kPlaceholderHeight) {
         return;
     }
     
     
-    placeholderLabelHeight.constant = 15;
-    _labelPlaceholder.font = [UIFont fontWithName:self.font.fontName size:12];
+    placeholderLabelHeight.constant = kPlaceholderHeight;
+    _labelPlaceholder.font = [UIFont fontWithName:self.font.fontName size:kPlaceholderFontSize];
     [UIView animateWithDuration:0.2 animations:^{
         [self layoutIfNeeded];
     }];

@@ -27,9 +27,7 @@
     newTextField.placeHolderColor = [UIColor blueColor];
     newTextField.selectedLineColor = [UIColor orangeColor];
     newTextField.selectedPlaceHolderColor = [UIColor orangeColor];
-    [newTextField setText:@"fefefe"];
     [self.view addSubview:newTextField];
-    [newTextField showErrorWithText:@"TJos feknfea jenkge"];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
