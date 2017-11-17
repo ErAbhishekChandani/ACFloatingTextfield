@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,14 +23,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0jD-h1-cyU">
-                                <rect key="frame" x="170.5" y="617" width="34" height="30"/>
+                                <rect key="frame" x="170.5" y="402" width="34" height="30"/>
                                 <state key="normal" title="Error"/>
                                 <connections>
                                     <action selector="showError:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sqW-KU-TWQ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pzh-Rg-K6p">
-                                <rect key="frame" x="172" y="566" width="30" height="30"/>
+                                <rect key="frame" x="172.5" y="351" width="30" height="30"/>
                                 <state key="normal" title="hide"/>
                                 <connections>
                                     <action selector="hideError:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6mq-hi-6e8"/>
@@ -44,6 +44,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="xab-fZ-zaN"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="gegegege" placeholder="Test1-2" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IaY-Ix-9A4" customClass="ACFloatingTextfield" customModule="ACFloatingTextField" customModuleProvider="target">
                                 <rect key="frame" x="20" y="120" width="335" height="50"/>
@@ -53,6 +56,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="T2e-PR-nXx"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="grgrgr" placeholder="Test1-3" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lhg-bC-Cd9" customClass="ACFloatingTextfield" customModule="ACFloatingTextField" customModuleProvider="target">
                                 <rect key="frame" x="20" y="201" width="335" height="50"/>
@@ -65,25 +71,60 @@
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="disableFloatingLabel" value="YES"/>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="uJI-pR-huK"/>
+                                </connections>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yt5-pc-Pgb">
+                                <rect key="frame" x="35.5" y="351" width="127" height="30"/>
+                                <state key="normal" title="Change Line Color"/>
+                                <connections>
+                                    <action selector="changeLineColor:" destination="BYZ-38-t0r" eventType="touchUpInside" id="flv-r7-TVU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ceF-hn-eOM">
+                                <rect key="frame" x="212.5" y="351" width="107" height="30"/>
+                                <state key="normal" title="Change p Color"/>
+                                <connections>
+                                    <action selector="chanagePlacecholderColor:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MKF-Np-Taf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z1X-8L-7kV">
+                                <rect key="frame" x="35" y="402" width="132" height="30"/>
+                                <state key="normal" title="Change Error Color"/>
+                                <connections>
+                                    <action selector="changeErrorColor:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aKF-nN-gXn"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="ceF-hn-eOM" firstAttribute="leading" secondItem="pzh-Rg-K6p" secondAttribute="trailing" constant="10" id="0Rc-SK-d08"/>
                             <constraint firstAttribute="trailing" secondItem="q53-Cz-Ayt" secondAttribute="trailing" constant="20" id="56C-CY-1D6"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="0jD-h1-cyU" secondAttribute="bottom" constant="20" id="8JP-89-cL9"/>
+                            <constraint firstItem="z1X-8L-7kV" firstAttribute="top" secondItem="Yt5-pc-Pgb" secondAttribute="bottom" constant="21" id="B5g-FA-x4X"/>
                             <constraint firstItem="IaY-Ix-9A4" firstAttribute="top" secondItem="q53-Cz-Ayt" secondAttribute="bottom" constant="20" id="Gb3-TW-tvF"/>
                             <constraint firstItem="lhg-bC-Cd9" firstAttribute="top" secondItem="IaY-Ix-9A4" secondAttribute="bottom" constant="31" id="Jsg-C0-BEb"/>
                             <constraint firstItem="0jD-h1-cyU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="MyN-eV-EbP"/>
                             <constraint firstAttribute="trailingMargin" secondItem="lhg-bC-Cd9" secondAttribute="trailing" constant="4" id="NcR-fc-dQX"/>
                             <constraint firstItem="lhg-bC-Cd9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="4" id="SW0-bL-iBp"/>
+                            <constraint firstItem="pzh-Rg-K6p" firstAttribute="top" secondItem="lhg-bC-Cd9" secondAttribute="bottom" constant="100" id="SnK-oX-Ya8"/>
+                            <constraint firstItem="pzh-Rg-K6p" firstAttribute="leading" secondItem="Yt5-pc-Pgb" secondAttribute="trailing" constant="10" id="Uh8-MR-QOA"/>
+                            <constraint firstItem="0jD-h1-cyU" firstAttribute="leading" secondItem="z1X-8L-7kV" secondAttribute="trailing" constant="3.5" id="WIj-Y5-m5D"/>
                             <constraint firstItem="q53-Cz-Ayt" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="30" id="YcL-Sr-r99"/>
+                            <constraint firstItem="Yt5-pc-Pgb" firstAttribute="centerY" secondItem="pzh-Rg-K6p" secondAttribute="centerY" id="ago-gB-dgH"/>
                             <constraint firstItem="q53-Cz-Ayt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="hwy-72-9rI"/>
+                            <constraint firstItem="ceF-hn-eOM" firstAttribute="centerY" secondItem="pzh-Rg-K6p" secondAttribute="centerY" id="kuo-Zq-q7I"/>
                             <constraint firstItem="pzh-Rg-K6p" firstAttribute="centerX" secondItem="0jD-h1-cyU" secondAttribute="centerX" id="m5O-bP-SpQ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="IaY-Ix-9A4" secondAttribute="trailing" constant="4" id="nPG-lM-RYf"/>
                             <constraint firstItem="IaY-Ix-9A4" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="4" id="vE3-uf-9js"/>
                             <constraint firstItem="0jD-h1-cyU" firstAttribute="top" secondItem="pzh-Rg-K6p" secondAttribute="bottom" constant="21" id="vcw-Uq-F70"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tf1" destination="q53-Cz-Ayt" id="QR9-M9-CKv"/>
+                        <outlet property="tf2" destination="IaY-Ix-9A4" id="k1M-Dp-mwU"/>
+                        <outlet property="tf3" destination="lhg-bC-Cd9" id="shM-83-NDn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

@@ -82,14 +82,16 @@
     _errorText = errorText;
     self.labelErrorPlaceholder.text = errorText;
 }
-
--(void)setLineColor:(UIColor *)lineColor {
-    _lineColor = lineColor;
+-(void)setErrorTextColor:(UIColor *)errorTextColor {
+    _errorTextColor = errorTextColor;
+    self.labelErrorPlaceholder.textColor = _errorTextColor;
+}
+-(void)setErrorLineColor:(UIColor *)errorLineColor {
+    _errorLineColor = errorLineColor;
     [self floatTheLabel];
 }
-
--(void)setPlaceHolderColor:(UIColor *)placeHolderColor {
-    _placeHolderColor = placeHolderColor;
+-(void)setLineColor:(UIColor *)lineColor {
+    _lineColor = lineColor;
     [self floatTheLabel];
 }
 
@@ -98,11 +100,18 @@
     [self floatTheLabel];
 }
 
+-(void)setPlaceHolderColor:(UIColor *)placeHolderColor {
+    _placeHolderColor = placeHolderColor;
+    [self floatTheLabel];
+}
+
 -(void)setSelectedPlaceHolderColor:(UIColor *)selectedPlaceHolderColor {
     _selectedPlaceHolderColor = selectedPlaceHolderColor;
     [self floatTheLabel];
 }
 
+
+#pragma mark  Intialization method
 -(void)initialization{
     
     self.clipsToBounds = true;
@@ -145,10 +154,12 @@
     /// Adding Placeholder Label.
     [self addPlaceholderLabel];
     
+    [self addErrorPlaceholderLabel];
+
     [self setValue:self.placeHolderColor forKeyPath:@"_placeholderLabel.textColor"];
 
     /// Placeholder Label Configuration.
-    if (![self.text isEqualToString:@""]) {
+    if (![self.text isEqualToString:@""]){
         [self floatTheLabel];
     }
     
@@ -169,7 +180,7 @@
     
     NSLayoutConstraint *trailingConstraint = [NSLayoutConstraint constraintWithItem:bottomLineView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0];
     
-    NSLayoutConstraint * bottomConstraint = [NSLayoutConstraint constraintWithItem:bottomLineView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-1];
+    NSLayoutConstraint * bottomConstraint = [NSLayoutConstraint constraintWithItem:bottomLineView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0];
     
     bottomLineViewHeight = [NSLayoutConstraint constraintWithItem:bottomLineView
                                                           attribute:NSLayoutAttributeHeight
@@ -180,7 +191,14 @@
                                                            constant:1];
 
     [self addConstraints:@[leadingConstraint,trailingConstraint,bottomConstraint]];
-    [self addConstraint:bottomLineViewHeight];
+    [bottomLineView addConstraint:bottomLineViewHeight];
+    
+    [self addTarget:self action:@selector(textfieldEditingChanged) forControlEvents:UIControlEventEditingChanged];
+}
+-(void)textfieldEditingChanged {
+    if (showingError) {
+        [self hideError];
+    }
 }
 -(void)addPlaceholderLabel{
 
@@ -250,7 +268,6 @@
     
     bottomLineViewHeight.constant = 2;
     if (self.errorText != nil && ![self.errorText isEqualToString:@""]) {
-        [self addErrorPlaceholderLabel];
         errorLabelHieght.constant = kPlaceholderHeight;
         [UIView animateWithDuration:0.2 animations:^{
             bottomLineView.backgroundColor = _errorLineColor;
@@ -434,6 +451,7 @@
 }
 -(void)showErrorWithText:(NSString *)errorText {
     _errorText = errorText;
+    _labelErrorPlaceholder.text = errorText;
     showingError = YES;
     [self showErrorPlaceHolder];
 }
