@@ -24,6 +24,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [_textFieldPassword becomeFirstResponder];
+
 }
 
 #pragma mark  UITextfield Delegates
