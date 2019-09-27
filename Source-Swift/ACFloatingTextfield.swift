@@ -335,7 +335,7 @@ fileprivate extension ACFloatingTextfield {
             bottomLineView?.backgroundColor = showingError ? self.errorLineColor : self.selectedLineColor;
             bottomLineViewHeight?.constant = 2;
             labelPlaceholder?.textColor = self.selectedPlaceHolderColor;
-            self.attributedPlaceholder = NSAttributedString(string: placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor: placeHolderColor])
+            self.attributedPlaceholder = NSAttributedString(string: placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor: selectedPlaceHolderColor])
         } else {
             bottomLineView?.backgroundColor = showingError ? self.errorLineColor : self.lineColor;
             bottomLineViewHeight?.constant = 1;
