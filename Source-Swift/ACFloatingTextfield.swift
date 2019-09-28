@@ -229,7 +229,7 @@ fileprivate extension ACFloatingTextfield {
         labelPlaceholder?.isHidden = true
         labelPlaceholder?.sizeToFit()
         labelPlaceholder?.translatesAutoresizingMaskIntoConstraints = false
-        self.setValue(placeHolderColor, forKeyPath: "_placeholderLabel.textColor")
+        self.attributedPlaceholder = NSAttributedString(string: placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor: placeHolderColor])
         if labelPlaceholder != nil {
             self.addSubview(labelPlaceholder!)
         }
@@ -333,15 +333,14 @@ fileprivate extension ACFloatingTextfield {
         if selected {
             
             bottomLineView?.backgroundColor = showingError ? self.errorLineColor : self.selectedLineColor;
-            labelPlaceholder?.textColor = self.selectedPlaceHolderColor;
             bottomLineViewHeight?.constant = 2;
-            self.setValue(self.selectedPlaceHolderColor, forKeyPath: "_placeholderLabel.textColor")
-
+            labelPlaceholder?.textColor = self.selectedPlaceHolderColor;
+            self.attributedPlaceholder = NSAttributedString(string: placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor: selectedPlaceHolderColor])
         } else {
             bottomLineView?.backgroundColor = showingError ? self.errorLineColor : self.lineColor;
             bottomLineViewHeight?.constant = 1;
             self.labelPlaceholder?.textColor = self.placeHolderColor
-            self.setValue(placeHolderColor, forKeyPath: "_placeholderLabel.textColor")
+            self.attributedPlaceholder = NSAttributedString(string: placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor: placeHolderColor])
         }
 
         if disableFloatingLabel == true {
@@ -364,8 +363,7 @@ fileprivate extension ACFloatingTextfield {
     
     //MARK:- Resign the Placeholder
     func resignPlaceholder() -> Void {
-
-        self.setValue(self.placeHolderColor, forKeyPath: "_placeholderLabel.textColor")
+        self.attributedPlaceholder = NSAttributedString(string: placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor: placeHolderColor])
 
         bottomLineView?.backgroundColor = showingError ? self.errorLineColor : self.lineColor;
         bottomLineViewHeight?.constant = 1;
