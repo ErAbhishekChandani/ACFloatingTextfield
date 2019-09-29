@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "ACFloatingTextfield-Swift"
-  s.version      = "1.7"
+  s.version      = "1.8"
   s.summary      = "UITextfield class to float the Placeholder and customize the placeholder while editing."
   s.description  = <<-DESC
 ACFloatingTextfield is subclass of UITextfield class that floats and animate the placeholder, further placeholder can customized like changing the color of placeholder while editing , change color of Bottom Selected line etc.
