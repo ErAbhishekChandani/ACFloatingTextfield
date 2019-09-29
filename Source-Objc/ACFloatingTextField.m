@@ -156,7 +156,7 @@
     
     [self addErrorPlaceholderLabel];
 
-    [self setValue:self.placeHolderColor forKeyPath:@"_placeholderLabel.textColor"];
+    self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.placeholder attributes:@{NSForegroundColorAttributeName:self.placeHolderColor}];
 
     /// Placeholder Label Configuration.
     if (![self.text isEqualToString:@""]){
@@ -318,7 +318,7 @@
         bottomLineView.backgroundColor = showingError ? self.errorLineColor : self.selectedLineColor;
         self.labelPlaceholder.textColor = self.selectedPlaceHolderColor;
         bottomLineViewHeight.constant = 2;
-        [self setValue:self.selectedPlaceHolderColor forKeyPath:@"_placeholderLabel.textColor"];
+        self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.placeholder attributes:@{NSForegroundColorAttributeName:self.selectedPlaceHolderColor}];
 
     }
     else{
@@ -326,7 +326,7 @@
         bottomLineView.backgroundColor = showingError ? self.errorLineColor : self.lineColor;
         self.labelPlaceholder.textColor = self.placeHolderColor;
         bottomLineViewHeight.constant = 1;
-        [self setValue:self.placeHolderColor forKeyPath:@"_placeholderLabel.textColor"];
+        self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.placeholder attributes:@{NSForegroundColorAttributeName:self.placeHolderColor}];
     }
     
     if (self.disableFloatingLabel){
@@ -354,7 +354,7 @@
 }
 -(void)resignPlaceholder{
 
-    [self setValue:self.placeHolderColor forKeyPath:@"_placeholderLabel.textColor"];
+    self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.placeholder attributes:@{NSForegroundColorAttributeName:self.placeHolderColor}];
 
     bottomLineView.backgroundColor = showingError ? self.errorLineColor : self.lineColor;
     bottomLineViewHeight.constant = 1;
