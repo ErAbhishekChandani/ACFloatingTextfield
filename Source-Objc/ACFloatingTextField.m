@@ -156,7 +156,8 @@
     
     [self addErrorPlaceholderLabel];
 
-    self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.placeholder attributes:@{NSForegroundColorAttributeName:self.placeHolderColor}];
+    NSString *placeholder = self.placeholder ? self.placeholder : @"";
+    self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder attributes:@{NSForegroundColorAttributeName:self.placeHolderColor}];
 
     /// Placeholder Label Configuration.
     if (![self.text isEqualToString:@""]){
