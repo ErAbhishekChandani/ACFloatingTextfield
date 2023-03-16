@@ -20,6 +20,52 @@ import UIKit
     fileprivate var placeholderLabelHeight : NSLayoutConstraint?
     fileprivate var errorLabelHieght : NSLayoutConstraint?
 
+     private var _isRightViewVisible: Bool = true
+    
+    var isRightViewVisible: Bool {
+        get {
+            return _isRightViewVisible
+        }
+        set {
+            _isRightViewVisible = newValue
+            updateView()
+        }
+    }
+    
+    @IBInspectable var leftImage: UIImage? {
+        didSet {
+            updateView()
+        }
+    }
+    
+    @IBInspectable var leftPadding: CGFloat = 0 {
+        didSet {
+            updateView()
+        }
+    }
+    
+    @IBInspectable var rightImage: UIImage? {
+        didSet {
+            updateView()
+        }
+    }
+    
+    @IBInspectable var rightPadding: CGFloat = 0 {
+        didSet {
+            updateView()
+        }
+    }
+    @IBInspectable var ImgWidth: CGFloat = 20 {
+        didSet {
+            updateView()
+        }
+    }
+    @IBInspectable var ImgHeight: CGFloat = 20 {
+        didSet {
+            updateView()
+        }
+    }
+    
      /// Disable Floating Label when true.
      @IBInspectable open var disableFloatingLabel : Bool = false
     
@@ -416,5 +462,67 @@ extension UIView {
         animation.duration = 0.6
         animation.values = [-20.0, 20.0, -20.0, 20.0, -10.0, 10.0, -5.0, 5.0, 0.0 ]
         layer.add(animation, forKey: "shake")
+    }
+}
+
+extension ACFloatingTextfield{
+    
+    func updateView() {
+        setLeftImage()
+        setRightImage()
+        
+    }
+    func setLeftImage() {
+        leftViewMode = UITextFieldViewMode.always
+        var view: UIView
+        
+        if let image = leftImage {
+            let imageView = UIImageView(frame: CGRect(x: leftPadding, y: 0, width: ImgWidth, height: ImgHeight))
+            imageView.image = image
+            // Note: In order for your image to use the tint color, you have to select the image in the Assets.xcassets and change the "Render As" property to "Template Image".
+            imageView.tintColor = tintColor
+            
+            var width = imageView.frame.width + leftPadding
+            
+            if borderStyle == UITextBorderStyle.none || borderStyle == UITextBorderStyle.line {
+                width += 5
+            }
+            
+            view = UIView(frame: CGRect(x: 0, y: 0, width: width, height: ImgHeight))
+            view.addSubview(imageView)
+        } else {
+            view = UIView(frame: CGRect(x: 0, y: 0, width: leftPadding, height: ImgHeight))
+        }
+        
+        leftView = view
+    }
+    
+    func setRightImage() {
+        rightViewMode = UITextFieldViewMode.always
+        
+        var view: UIView
+        
+       
+        
+        if let image = rightImage, isRightViewVisible {
+            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: ImgWidth , height: ImgHeight))
+            imageView.image = image
+            // Note: In order for your image to use the tint color, you have to select the image in the Assets.xcassets and change the "Render As" property to "Template Image".
+            imageView.tintColor = tintColor
+            
+            var width = imageView.frame.width + rightPadding
+            
+            if borderStyle == UITextBorderStyle.none || borderStyle == UITextBorderStyle.line {
+                width += 5
+            }
+            
+            view = UIView(frame: CGRect(x: 0, y: 0, width: width, height: ImgHeight))
+            view.addSubview(imageView)
+            
+        } else {
+            view = UIView(frame: CGRect(x: 0, y: 0, width: rightPadding, height: ImgHeight))
+        }
+        
+        rightView = view
     }
 }
